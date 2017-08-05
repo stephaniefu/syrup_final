@@ -53,8 +53,8 @@ const Message = db.define('message', {
   timestamps: false
 })
 
-User.belongsToMany(User, {as: 'recipient', through: Match, unique: false});
-User.belongsToMany(User, {as: 'sender', through: Message, unique: false});
+User.belongsToMany(User, {as: 'matchee', through: Match, unique: false});
+User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
 
 User.sync();
 Match.sync();
