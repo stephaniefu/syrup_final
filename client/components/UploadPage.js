@@ -1,4 +1,6 @@
 import React from 'react';
+import NavBar from './NavBar';
+import UploadSection from './UploadSection';
 
 export default class UploadPage extends React.Component {
 	constructor(){
@@ -8,7 +10,8 @@ export default class UploadPage extends React.Component {
 	render(){
 		return(
 			<div>
-				<h2>UploadPage</h2>
+				<NavBar/>
+				<UploadSection/>
 			</div>
 		);
 	}
