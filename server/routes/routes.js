@@ -3,10 +3,4 @@ const controller = require('../controller/controller');
 
 
 
-
-
-
-
-
-
 module.exports = router;
