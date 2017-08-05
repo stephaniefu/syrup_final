@@ -1,20 +1,12 @@
 const Sequelize = require('sequelize');
 const db = require('../index');
 
-const User = db.define('users', {
-  username: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+const User = db.define('user', {
   firstname: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  lastname: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  faceimage: {
+  profilepic: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -33,15 +25,48 @@ const User = db.define('users', {
   age: {
     type: Sequelize.INTEGER,
     allowNull: false
-  },
-  matches: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: false
   }
 }, {
   timestamps: false
 })
 
-User.sync()
+const Match = db.define('match', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+}, {
+  timestamps: false
+});
 
-module.exports = User;
+const Message = db.define('message', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  text: {
+    type: Sequelize.STRING
+  }
+}, {
+  timestamps: false
+})
+
+User.belongsToMany(User, {as: 'recipient', through: Match, unique: false});
+User.belongsToMany(User, {as: 'sender', through: Message, unique: false});
+
+User.sync();
+Match.sync();
+Message.sync();
+
+// User.sync({force: true});
+// Match.sync({force: true});
+// Message.sync({force: true});
+
+
+module.exports = {
+  User, 
+  Match,
+  Message
+};
