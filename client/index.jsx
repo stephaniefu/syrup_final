@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UploadPage from './components/UploadPage';
+import Home from './components/Home';
 
-ReactDOM.render(<UploadPage/>, document.getElementById('root'));
+ReactDOM.render(<Home/>, document.getElementById('root'));

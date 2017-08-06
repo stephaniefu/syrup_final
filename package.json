@@ -1,5 +1,5 @@
 {
-  "name": "facedate",
+  "name": "syrup",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auth0-js": "^8.8.0",
     "axios": "^0.16.2",
     "babel": "^6.23.0",
     "babel-core": "^6.25.0",
