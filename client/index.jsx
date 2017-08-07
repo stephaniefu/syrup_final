@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './components/Home';
+import App from './components/App.js';
+import { HashRouter } from 'react-router-dom'
 
-ReactDOM.render(<Home/>, document.getElementById('root'));
+ReactDOM.render((
+  <HashRouter>
+    <App />
+  </HashRouter>
+), document.getElementById('root'))

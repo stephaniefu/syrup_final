@@ -1,6 +1,5 @@
 import React from 'react';
 import NavBar from './NavBar';
-import NavBarLogin from './NavBarLogin';
 import HomePage from './HomePage';
 
 export default class Home extends React.Component {
@@ -10,9 +9,9 @@ export default class Home extends React.Component {
 
 	render(){
 		return(
-			<div>
-				<NavBarLogin/>
-				<HomePage/>
+			<div className="intro-message">
+				<NavBar />
+				<HomePage />
 			</div>
 		);
 	}
