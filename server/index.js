@@ -15,6 +15,7 @@ app.use(parser.json());
 app.use(parser.urlencoded( {extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../static')));
+app.use('/api', routes);
 
 app.listen(PORT, err => {
   if (err) {

@@ -12,7 +12,7 @@ const controller = require('../controller/controller');
 // //Getting Matches by recent
 // router.get('/matches/recent', controller.getMatchesByRecent);
 // //Add personal info
-// router.post('/profile/:id', controller.addProfile);
+router.post('/profile', controller.addProfile);
 // //Edit personali info
 // router.put('/profile/:id', controller.editProfile);
 // //Upload profile pic
