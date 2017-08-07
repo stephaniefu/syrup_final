@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UploadPage from './components/UploadPage';
+import App from './components/App.js';
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.render(<UploadPage/>, document.getElementById('root'));
+ReactDOM.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+), document.getElementById('root'))
