@@ -10,8 +10,7 @@ export default class Home extends React.Component {
 
 	render(){
 		return(
-			<div className="intro-message">
-				<h1>Welcome to Syrup!</h1>
+			<div>
 				<NavBarLogin/>
 				<HomePage/>
 			</div>

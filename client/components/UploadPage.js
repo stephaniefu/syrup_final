@@ -9,14 +9,14 @@ export default class UploadPage extends React.Component {
 		super();
 	}
 
-	render(){
-		return(
+	render() {
+		return (
 			<div>
 				<NavBar/>
 				<UploadSection/>
 				<MatchesUploadSection/>
 				<Footer/>
 			</div>
-		);
+		)
 	}
 }
