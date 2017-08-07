@@ -19,6 +19,7 @@ const NavBar = () => (
               <li><Link to='/messages'>Messages</Link></li>
               <li><Link to='/upload'>Upload</Link></li>
               <li><Link to='/profile'>Profile</Link></li>
+              <li><Link to='/ownProfile'>Edit Profile</Link></li>
             </ul>
           </div>
       </div>
