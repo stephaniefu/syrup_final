@@ -11,7 +11,8 @@ const User = db.define('user', {
     allowNull: false
   },
   images: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
+    // type: Sequelize.ARRAY(Sequelize.STRING),
+    type: Sequelize.STRING,
     allowNull: false
   },
   bio: {

@@ -28143,6 +28143,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _axios = __webpack_require__(242);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -28177,19 +28181,30 @@ var ownProfile = function (_Component) {
   _createClass(ownProfile, [{
     key: 'handleOnChange',
     value: function handleOnChange(event) {
-      var temp = this.state.name;
+      var temp = event.target.name;
       this.setState(_defineProperty({}, temp, event.target.value));
     }
   }, {
     key: 'handleOnUpdate',
     value: function handleOnUpdate() {
-      axios.post('http://localhost:8080/api/profile', {
+      var _this2 = this;
+
+      _axios2.default.post('http://localhost:8080/api/profile', {
         firstname: this.state.firstname,
         profilepic: this.state.profilepic,
         age: this.state.age,
         gender: this.state.gender,
         bio: this.state.bio,
         images: this.state.images
+      }).then(function () {
+        _this2.setState({
+          firstname: '',
+          profilepic: '',
+          age: '',
+          gender: '',
+          bio: '',
+          images: ''
+        });
       });
     }
   }, {
@@ -28203,12 +28218,12 @@ var ownProfile = function (_Component) {
           null,
           'Own Profile'
         ),
-        _react2.default.createElement('input', { name: 'firstname', value: this.state.firstname, onChange: this.handleOnChange }),
-        _react2.default.createElement('input', { name: 'profilepic', value: this.state.profilepic, onChange: this.handleOnChange }),
-        _react2.default.createElement('input', { name: 'age', value: this.state.age, onChange: this.handleOnChange }),
-        _react2.default.createElement('input', { name: 'gender', value: this.state.gender, onChange: this.handleOnChange }),
-        _react2.default.createElement('input', { name: 'bio', value: this.state.bio, onChange: this.handleOnChange }),
-        _react2.default.createElement('input', { name: 'images', value: this.state.images, onChange: this.handleOnChange }),
+        _react2.default.createElement('input', { name: 'firstname', value: this.state.firstname, onChange: this.handleOnChange, placeholder: 'First Name' }),
+        _react2.default.createElement('input', { name: 'profilepic', value: this.state.profilepic, onChange: this.handleOnChange, placeholder: 'Profile Pic' }),
+        _react2.default.createElement('input', { name: 'age', value: this.state.age, onChange: this.handleOnChange, placeholder: 'Age' }),
+        _react2.default.createElement('input', { name: 'gender', value: this.state.gender, onChange: this.handleOnChange, placeholder: 'Gender' }),
+        _react2.default.createElement('input', { name: 'bio', value: this.state.bio, onChange: this.handleOnChange, placeholder: 'Bio' }),
+        _react2.default.createElement('input', { name: 'images', value: this.state.images, onChange: this.handleOnChange, placeholder: 'Images' }),
         _react2.default.createElement(
           'button',
           { onClick: this.handleOnUpdate },
