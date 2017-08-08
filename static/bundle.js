@@ -27102,12 +27102,12 @@ var ProfilePage = function (_React$Component) {
       userId: '1',
       userData: {
         "id": "1",
-        "firstname": "Selena",
-        "profilepic": "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
-        "images": ["https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet", "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet", "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet"],
+        "firstname": "Harold",
+        "profilepic": "http://cdn77.sadanduseless.com/wp-content/uploads/2014/09/hide-the-pain-harold.jpg",
+        "images": ["https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg", "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg", "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg", "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg"],
         "bio": "super rich and famous",
-        "gender": "female",
-        "age": "24"
+        "gender": "male",
+        "age": "65"
       }
     };
     return _this;
@@ -27186,31 +27186,58 @@ var ProfileHead = function (_React$Component) {
     return _possibleConstructorReturn(this, (ProfileHead.__proto__ || Object.getPrototypeOf(ProfileHead)).call(this, props));
   }
 
+  // render() {
+  //   return (
+  //     <div className="profileHead">
+  //       <div className="profileImg">
+  //         <img src={this.props.data.profilepic} width="200" height="200"/>
+  //       </div>
+  //       <div className="profileInfo">
+  //         <h3>{this.props.data.firstname}, {this.props.data.age}</h3>
+  //         <p>{this.props.data.bio}</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+
   _createClass(ProfileHead, [{
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "div",
-        { className: "profileHead" },
+        null,
         _react2.default.createElement(
           "div",
-          { className: "profileImg" },
-          _react2.default.createElement("img", { src: this.props.data.profilepic, width: "200", height: "200" })
-        ),
-        _react2.default.createElement(
-          "div",
-          { className: "profileInfo" },
+          { className: "profileCard" },
+          _react2.default.createElement("img", { src: this.props.data.profilepic, width: "300", height: "200" }),
           _react2.default.createElement(
-            "h3",
-            null,
-            this.props.data.firstname,
-            ", ",
-            this.props.data.age
-          ),
-          _react2.default.createElement(
-            "p",
-            null,
-            this.props.data.bio
+            "div",
+            { className: "profileContainer" },
+            _react2.default.createElement(
+              "h2",
+              null,
+              "John Doe"
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "profileTitle" },
+              "CEO and Founder, Example"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              "Harvard University"
+            ),
+            _react2.default.createElement(
+              "p",
+              null,
+              _react2.default.createElement(
+                "button",
+                { className: "cardButton" },
+                "Match"
+              )
+            )
           )
         )
       );
@@ -27266,7 +27293,7 @@ var ProfilePhotos = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'photosContainer' },
         _react2.default.createElement(
           'ul',
           { className: 'profilePhotos' },

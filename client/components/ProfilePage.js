@@ -11,16 +11,17 @@ export default class ProfilePage extends React.Component {
       userId: '1',
       userData: {
         "id": "1",
-        "firstname": "Selena",
-        "profilepic": "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+        "firstname": "Harold",
+        "profilepic": "http://cdn77.sadanduseless.com/wp-content/uploads/2014/09/hide-the-pain-harold.jpg",
         "images": [
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet"
+          "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg",
+          "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg",
+          "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg",
+          "https://pbs.twimg.com/profile_images/540223285221277696/Xlk9rNfl.jpeg"
         ],
         "bio": "super rich and famous",
-        "gender": "female",
-        "age": "24"
+        "gender": "male",
+        "age": "65"
       }
     }
   }
@@ -45,7 +46,7 @@ export default class ProfilePage extends React.Component {
       <div className="intro-message">
         <div className="profilePage">
           <ProfileHead data={this.state.userData}/>
-          <ProfilePhotos images={this.state.userData.images}/>
+          <ProfilePhotos images={this.state.userData.images}/> 
         </div>
       </div>
     );
