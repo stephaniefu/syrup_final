@@ -5,6 +5,7 @@ const db = require('../db');
 const model = require('../db/models/model');
 const routes = require('./routes/routes');
 const path = require('path');
+const cors = require('cors');
 //routes, model
 
 const PORT = 8080;
@@ -15,6 +16,9 @@ app.use(parser.json());
 app.use(parser.urlencoded( {extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../static')));
+
+app.use(cors());
+
 app.use('/api', routes);
 
 app.listen(PORT, err => {

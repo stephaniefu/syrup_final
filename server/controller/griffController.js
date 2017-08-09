@@ -1,0 +1,21 @@
+const db = require('../../db/models/model');
+
+module.exports = {
+	getMatchesByPercent: (req, res) => {
+		console.log('this is the req.params.subject_id ',req.params.subject_id);
+		db.User.findOne({
+			where: {
+				id: req.params.subject_id
+			}
+		})
+			.then(data => {
+				res.status(200).send(data);
+				console.log(data);
+				console.log('Successfully fetched data');
+			})
+			.catch(err => {
+				res.status(500).send(err);
+				console.log('Error fetching data ', err);
+			})
+	}		
+}

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const controller = require('../controller/controller');
+const griffController = require('../controller/griffController');
 
 // //Submiting a Face Photo 
 // router.post('/upload', controller.uploadPhoto);
@@ -23,8 +24,12 @@ router.post('/profile', controller.addProfile);
 // router.get('/message/:id', controller.getMessageByUser);
 // //Storing messages in DB
 // router.post('/message/:id', controller.saveMessages);
+
 // get individual profile
 router.get('/profile/:id', controller.getProfile);
+
+router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
+
 
 
 module.exports = router;
