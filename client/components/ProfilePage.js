@@ -11,18 +11,17 @@ export default class ProfilePage extends React.Component {
       id: this.props.match.params.id,
       firstname: '',
       profilepic: '',
-      images: '',
+      images: [],
       bio: '',
       gender: '',
-      age: 0
+      age: 0,
+      matched: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
-    axios.post(`/api/match/${this.state.id}`, {
-      id: this.state.id
-    })
+    axios.post(`/api/match/${this.state.id}`)
     .then(response => {
       console.log(response.data);
     })
@@ -30,11 +29,10 @@ export default class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('id is ', this.state.id);
     axios.get(`/api/profile/${this.state.id}`)
     .then(response => {
       
-      var images = [];
+      var images = this.state.images;
       response.data.images.forEach(image => {
         images.push(image);
       })
@@ -47,19 +45,16 @@ export default class ProfilePage extends React.Component {
         gender: response.data.gender,
         age: response.data.age
       })
-
-      console.log(this.state.images);
     })
     .catch(err => { if (err) { return console.error(err) } })
   }
-
-  // <ProfilePhotos images={this.state.images}/>
 
   render() {
     return (
       <div className="intro-message">
         <div className="profilePage">
-          <ProfileHead data={this.state} handleSubmit={this.handleSubmit}/> 
+          <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />        
+          <ProfilePhotos images={this.state.images} />       
         </div>
       </div>
     );

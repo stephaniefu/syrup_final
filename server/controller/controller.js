@@ -31,8 +31,8 @@ module.exports = {
 
   connectMatch: (req, res) => {
     Model.Match.create({
-      userId: 4,
-      matcheeId: req.body.userId,
+      userId: 3,
+      matcheeId: req.params.id,
     })
     .then(data => {
       res.status(201).send(data)

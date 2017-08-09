@@ -3,14 +3,17 @@ import React from 'react';
 export default class ProfileHead extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userId: ''
-    }
-
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  isMatched() {
+    if (!matched) {
+      return <p><button className="cardButton" onClick={this.sendMatch}>Match</button></p>
+    }
+    return <p><button className="cardButton">Matched!</button></p>
+  }
+
+  sendMatch() {
     this.props.handleSubmit();
   }
 
