@@ -25,6 +25,7 @@ export default class UploadSection extends React.Component {
     }
 
     handleSubmit(event){
+        event.preventDefault();
         this.setState({input: this.state.input});
         console.log('This is the input: ', this.state.input);
         const imageUrl = this.state.input;
