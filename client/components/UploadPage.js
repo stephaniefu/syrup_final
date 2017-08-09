@@ -14,7 +14,7 @@ export default class UploadPage extends React.Component {
 			<div>
 				<NavBar/>
 				<UploadSection/>
-				<MatchesUploadSection/>
+				
 				<Footer/>
 			</div>
 		)
