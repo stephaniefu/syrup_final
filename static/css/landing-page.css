@@ -193,7 +193,6 @@ h1 {
     
 }
 
-<<<<<<< HEAD
 .profilePhotos {
     width: 75%;
     list-style-type: none;
@@ -219,7 +218,7 @@ h1 {
 /* profilePage
 profileImg
 profileInfo */
-=======
+
 #uploading-message{
     position: relative;
     bottom: 260px;
@@ -245,4 +244,3 @@ profileInfo */
 
 
 
->>>>>>> finished basic func on upload page

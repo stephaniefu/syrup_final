@@ -20,13 +20,13 @@ export default class UploadSection extends React.Component {
     handleInputChange(event){
         event.preventDefault();
         this.setState({input: event.target.value}, () => {
-            //console.log('This is the state of input: ', this.state.input);
+            console.log('This is the state of input: ', this.state.input);
         })
     }
 
     handleSubmit(event){
         this.setState({input: this.state.input});
-        //console.log('This is the input: ', this.state.input);
+        console.log('This is the input: ', this.state.input);
         const imageUrl = this.state.input;
         const api = {
             "app_key": apiKey.apiKey,
