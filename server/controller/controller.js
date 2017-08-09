@@ -22,8 +22,11 @@ module.exports = {
   },
 
   getProfile: (req, res) => {
-    console.log('url is: ', req.url); // /profile/1
-    res.send(data[2]);
+    Model.User.findById(req.params.id)
+    .then(response => {
+      res.send(response);
+    })
+    .catch(err => { if (err) {console.error(err) } })
   },
 
   connectMatch: (req, res) => {
