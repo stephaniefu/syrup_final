@@ -36447,13 +36447,9 @@ var NavBar = function (_Component) {
               _react2.default.createElement('span', { className: 'icon-bar' })
             ),
             _react2.default.createElement(
-              'a',
-              { className: 'navbar-brand topnav', href: '#' },
-              _react2.default.createElement(
-                _reactRouterDom.Link,
-                { to: '/' },
-                'Syrup'
-              )
+              _reactRouterDom.Link,
+              { className: 'navbar-brand topnav', to: '/' },
+              'Syrup'
             )
           ),
           _react2.default.createElement(
