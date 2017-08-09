@@ -35,11 +35,11 @@ class ownProfile extends Component {
     .then(() => {
       this.setState({
         firstname: '',
-      profilepic: '',
-      age: '',
-      gender: '',
-      bio: '',
-      images: '',
+        profilepic: '',
+        age: '',
+        gender: '',
+        bio: '',
+        images: '',
       })
     })
   }
