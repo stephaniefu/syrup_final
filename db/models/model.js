@@ -83,17 +83,12 @@ User.sync({force: true})
 Match.sync();
 Message.sync();
 
-// User.sync({force: true});
-// Match.sync({force: true});
-// Message.sync({force: true});
-
 // SEED SCRIPT
 // ==============================
 // db.sync({ force: true })
 // .then(() => {
 //   return User.bulkCreate(data)
 // })
-
 
 module.exports = {
   User, 
