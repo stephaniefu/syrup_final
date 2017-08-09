@@ -3,8 +3,8 @@ const controller = require('../controller/controller');
 
 // //Submiting a Face Photo 
 // router.post('/upload', controller.uploadPhoto);
-// //Connect with match
-// router.post('/matches', controller.connectMatch);
+//Connect with match
+router.post('/match/1', controller.connectMatch);
 // //Getting all Matches
 // router.get('/matches', controller.getMatches);
 // //Getting Matches by %

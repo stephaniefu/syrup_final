@@ -24,5 +24,18 @@ module.exports = {
   getProfile: (req, res) => {
     console.log('url is: ', req.url); // /profile/1
     res.send(data[2]);
+  },
+
+  connectMatch: (req, res) => {
+    Model.Match.create({
+      userId: 4,
+      matcheeId: req.body.userId,
+    })
+    .then(data => {
+      res.status(201).send(data)
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
   }
 };

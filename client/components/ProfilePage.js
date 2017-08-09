@@ -8,7 +8,7 @@ export default class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '1',
+      userId: 1,
       userData: {
         "id": "1",
         "firstname": "Harold",
@@ -24,28 +24,40 @@ export default class ProfilePage extends React.Component {
         "age": "65"
       }
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    axios.post(`http://127.0.0.1:8080/api/match/${this.state.userId}`, {
+      userId: this.state.userId
+    })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(err => { if (err) {return console.error(err)} })
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.0.1:8080/api/profile/${this.state.userId}`)
-    .then(response => {
-      // this.setState( userData = {
-      //   firstname: response.data.firstname,
-      //   profilepic: response.data.profilepic,
-      //   images: response.data.images,
-      //   bio: response.data.bio,
-      //   gender: response.data.gender,
-      //   age: response.data.age
-      // })
-    })
-    .catch(err => { if (err) { return console.error(err) } })
+    console.log('id is: ', this.state.userId);
+    // axios.get(`http://127.0.0.1:8080/api/profile/${this.state.userId}`)
+    // .then(response => {
+    //   // this.setState( userData = {
+    //   //   firstname: response.data.firstname,
+    //   //   profilepic: response.data.profilepic,
+    //   //   images: response.data.images,
+    //   //   bio: response.data.bio,
+    //   //   gender: response.data.gender,
+    //   //   age: response.data.age
+    //   // })
+    // })
+    // .catch(err => { if (err) { return console.error(err) } })
   }
 
   render() {
     return (
       <div className="intro-message">
         <div className="profilePage">
-          <ProfileHead data={this.state.userData}/>
+          <ProfileHead data={this.state.userData} handleSubmit={this.handleSubmit}/>
           <ProfilePhotos images={this.state.userData.images}/> 
         </div>
       </div>

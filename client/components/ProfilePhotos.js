@@ -5,10 +5,6 @@ export default class ProfilePhotos extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('^^^props^^^', this.props);
-  }
-
   render() {
     return (
       <div className="photosContainer">
