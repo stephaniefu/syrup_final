@@ -22,7 +22,7 @@ router.post('/profile', controller.addProfile);
 // //Getting individual messages
 // router.get('/message/:id', controller.getMessageByUser);
 // //Storing messages in DB
-// router.post('/message/:id', controller.saveMessages);
+router.post('/message/:userid/:recipientid', controller.saveMessages);
 
 
 module.exports = router;

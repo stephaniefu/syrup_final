@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+// const db_URL = require('dotenv').config();
 
-const db = new Sequelize('postgres://meaitwrz:34GQuOgnOoH9SOciPrc6BVd0T33G7dls@babar.elephantsql.com:5432/meaitwrz');
+const db = new Sequelize('postgres://kopordan:93HHSxj-wO4nxzS3P1NANXGrdmtT0Whd@stampy.db.elephantsql.com:5432/kopordan');
 
 
 db.authenticate()

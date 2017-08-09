@@ -4,7 +4,7 @@ import history from '../history';
 
 export default class Auth {
   constructor() {
-    this.autho0 = new auth0.WebAuth({
+    this.auth0 = new auth0.WebAuth({
       domain: AUTH_CONFIG.domain,
       clientID: AUTH_CONFIG.clientID,
       redirectUri: AUTH_CONFIG.redirectUri,
@@ -19,16 +19,18 @@ export default class Auth {
   }
 
   login() {
-    this.autho0.authorize();
+    this.auth0.authorize();
   }
 
   handleAuthentication() {
+    console.log('youre in handle authentication')
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('this is your auth result', authResult)
         this.setSession(authResult);
-        history.replace('/home');
+        history.replace('/upload');
       } else if (err) {
-        history.replace('/home');
+        history.replace('/upload');
         console.log(err);
       }
     });
@@ -36,12 +38,13 @@ export default class Auth {
 
   setSession(authResult) {
     // Set the time that the access token will expire at
+    console.log('we are in setSesstions')
     let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/upload');
   }
 
   logout() {
