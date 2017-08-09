@@ -17,5 +17,19 @@ module.exports = {
   .catch(err => {
     res.status(404).send(err)
   })
+  },
+
+  saveMessages: (req, res) => {
+    Model.Message.create({
+      text: req.body.text,
+      userid: req.params.userid,
+      recipientid: req.params.recipientid
+    })
+    .then(data => {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
   }
 };

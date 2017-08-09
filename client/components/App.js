@@ -30,19 +30,18 @@ const App = () => {
 		<BrowserRouter history={history}>
 			<div>
 		<NavBarLogin auth={auth}/> 
-		<Messages />
 		<Switch>
       <Route exact path='/' component={HomePage}/>
-      <Route path='/upload' component={UploadPage}/>
-      <Route path='/profile' component={ProfilePage}/>
-      <Route path='/ownProfile' component={ownProfile}/>
-      <Route path='/matches' component={Matches}/>
-      <Route path='/messages' component={Messages}/>
-			{/* <Route path='/callback' render={(props) => {
+      <Route exact path='/upload' component={UploadPage}/>
+      <Route exact path='/profile' component={ProfilePage}/>
+      <Route exact path='/ownProfile' component={ownProfile}/>
+      <Route exact path='/matches' component={Matches}/>
+      <Route exact path='/messages' component={Messages}/>
+			 <Route path='/callback' render={(props) => {
 				console.log('youre in callback path')
 				handleAuthentication(props);
 				return <UploadPage auth={auth}/>;
-			}}/> */}
+			}}/> 
     </Switch>
 		</div>
 		</BrowserRouter>

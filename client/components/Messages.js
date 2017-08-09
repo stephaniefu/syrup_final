@@ -1,12 +1,13 @@
 import React from 'react';
 import MessageBox from './MessageBox';
-import SocketIOClient from 'socket.io-client';
+import SocketIsockOClient from 'socket.io-client';
+import axios from 'axios';
 
 
-const socket = io.connect();
+// const socket = io.connect();
 
 const divStyle = {
-  height: 200,
+  height: 500,
 };
 
 export default class Messages extends React.Component {
@@ -21,6 +22,22 @@ export default class Messages extends React.Component {
     this.handleOnSend = this.handleOnSend.bind(this);
   }
 
+  componentDidMount(){
+    this.socket = io('/')
+    this.socket.on('chat message', data => {
+      console.log('the data i get back', data)
+      // axios.post('http://localhost:8080/api/message/:userid/:recipientid', {
+      //   text: data
+      // })
+        this.setState({
+          text: '',
+          messages: [...this.state.messages, data],
+        })
+      console.log(this.state.messages)
+    })
+    
+  }
+
   handleOnChange(e) {
     this.setState({
       text: e.target.value
@@ -29,23 +46,16 @@ export default class Messages extends React.Component {
 
   handleOnSend(e){
     e.preventDefault();
-    socket.emit('send message', this.state.text)
-    // this.setState({
-    //   message: ''
-    // })
-    socket.on('chat message', data => {
-      console.log('the data i get back',data)
-      this.setState({
-        messages: this.state.messages.push(data)
-      })
-      })
+    this.socket.emit('send message', this.state.text)
   }
 
   render() {
     return (
       <div className="intro-message">
         <h1>This is the messages page!</h1>
+        <div style={divStyle} >
         <MessageBox messages={this.state.messages}/>
+        </div>
          <form>
            <input name="message" value={this.state.message} onChange={this.handleOnChange}/>
            <button onClick={this.handleOnSend}>Send</button>

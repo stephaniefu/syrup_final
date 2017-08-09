@@ -17,14 +17,9 @@ app.use(parser.urlencoded( {extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/api', routes);
-
-// app.listen(PORT, err => {
-//   if (err) {
-//     console.log(`Could not connect to PORT ${PORT}`, err)
-//   } else {
-//     console.log(`Successfully connected to PORT ${PORT}`)
-//   }
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../static/index.html'))
+});
 
 // socket.io
 server.listen(PORT, err => {
@@ -39,12 +34,12 @@ io.on('connection', socket => {
     console.log('a user connected', socket.id);
       socket.on('disconnect', () => {
        console.log('user disconnected')
-  })
+});
+
+socket.on('send message', msg => {
+  console.log('message: ' + msg)
+  io.sockets.emit('chat message', msg);
 })
 
-io.on('connection', socket => {
-  socket.on('send message', msg => {
-    console.log('message: ' + msg)
-    io.emit('chat message', msg);
-  })
+
 })

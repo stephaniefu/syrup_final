@@ -15215,7 +15215,13 @@ var _socket = __webpack_require__(345);
 
 var _socket2 = _interopRequireDefault(_socket);
 
+var _axios = __webpack_require__(120);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -15223,10 +15229,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var socket = io.connect();
+// const socket = io.connect();
 
 var divStyle = {
-  height: 200
+  height: 500
 };
 
 var Messages = function (_React$Component) {
@@ -15247,6 +15253,24 @@ var Messages = function (_React$Component) {
   }
 
   _createClass(Messages, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.socket = io('/');
+      this.socket.on('chat message', function (data) {
+        console.log('the data i get back', data);
+        // axios.post('http://localhost:8080/api/message/:userid/:recipientid', {
+        //   text: data
+        // })
+        _this2.setState({
+          text: '',
+          messages: [].concat(_toConsumableArray(_this2.state.messages), [data])
+        });
+        console.log(_this2.state.messages);
+      });
+    }
+  }, {
     key: 'handleOnChange',
     value: function handleOnChange(e) {
       this.setState({
@@ -15256,19 +15280,8 @@ var Messages = function (_React$Component) {
   }, {
     key: 'handleOnSend',
     value: function handleOnSend(e) {
-      var _this2 = this;
-
       e.preventDefault();
-      socket.emit('send message', this.state.text);
-      // this.setState({
-      //   message: ''
-      // })
-      socket.on('chat message', function (data) {
-        console.log('the data i get back', data);
-        _this2.setState({
-          messages: _this2.state.messages.push(data)
-        });
-      });
+      this.socket.emit('send message', this.state.text);
     }
   }, {
     key: 'render',
@@ -15281,7 +15294,11 @@ var Messages = function (_React$Component) {
           null,
           'This is the messages page!'
         ),
-        _react2.default.createElement(_MessageBox2.default, { messages: this.state.messages }),
+        _react2.default.createElement(
+          'div',
+          { style: divStyle },
+          _react2.default.createElement(_MessageBox2.default, { messages: this.state.messages })
+        ),
         _react2.default.createElement(
           'form',
           null,
@@ -27514,16 +27531,20 @@ var App = function App() {
 				'div',
 				null,
 				_react2.default.createElement(_NavBarLogin2.default, { auth: auth }),
-				_react2.default.createElement(_Messages2.default, null),
 				_react2.default.createElement(
 					_reactRouterDom.Switch,
 					null,
 					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _HomePage2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/upload', component: _UploadPage2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _ProfilePage2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/ownProfile', component: _ownProfile2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/matches', component: _Matches2.default }),
-					_react2.default.createElement(_reactRouterDom.Route, { path: '/messages', component: _Messages2.default })
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/upload', component: _UploadPage2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/profile', component: _ProfilePage2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/ownProfile', component: _ownProfile2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/matches', component: _Matches2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/messages', component: _Messages2.default }),
+					_react2.default.createElement(_reactRouterDom.Route, { path: '/callback', render: function render(props) {
+							console.log('youre in callback path');
+							handleAuthentication(props);
+							return _react2.default.createElement(_UploadPage2.default, { auth: auth });
+						} })
 				)
 			)
 		)
@@ -27540,7 +27561,7 @@ exports.default = App;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -27558,147 +27579,91 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var NavBarLogin = function (_React$Component) {
-  _inherits(NavBarLogin, _React$Component);
+    _inherits(NavBarLogin, _React$Component);
 
-  function NavBarLogin(props) {
-    _classCallCheck(this, NavBarLogin);
+    function NavBarLogin(props) {
+        _classCallCheck(this, NavBarLogin);
 
-    var _this = _possibleConstructorReturn(this, (NavBarLogin.__proto__ || Object.getPrototypeOf(NavBarLogin)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (NavBarLogin.__proto__ || Object.getPrototypeOf(NavBarLogin)).call(this, props));
 
-    _this.login = _this.login.bind(_this);
-    _this.logout = _this.logout.bind(_this);
-    return _this;
-  }
-
-  _createClass(NavBarLogin, [{
-    key: 'login',
-    value: function login() {
-      console.log('the nav bar props', this.props);
-      this.props.auth.login();
+        _this.login = _this.login.bind(_this);
+        _this.logout = _this.logout.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'logout',
-    value: function logout() {
-      this.props.auth.logout();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'nav',
-        { className: 'navbar navbar-default navbar-fixed-top topnav', role: 'navigation' },
-        _react2.default.createElement(
-          'div',
-          { className: 'container topnav' },
-          _react2.default.createElement(
-            'div',
-            { className: 'navbar-header' },
-            _react2.default.createElement(
-              'button',
-              { type: 'button', className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1' },
-              _react2.default.createElement(
-                'span',
-                { className: 'sr-only' },
-                'Toggle navigation'
-              ),
-              _react2.default.createElement('span', { className: 'icon-bar' }),
-              _react2.default.createElement('span', { className: 'icon-bar' }),
-              _react2.default.createElement('span', { className: 'icon-bar' })
-            ),
-            _react2.default.createElement(
-              'a',
-              { className: 'navbar-brand topnav', href: '#' },
-              'Syrup'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-            _react2.default.createElement(
-              'ul',
-              { className: 'nav navbar-nav navbar-right' },
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  { onClick: this.login },
-                  'Log In'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  { onClick: this.login },
-                  'Sign Up'
-                )
-              ),
-              _react2.default.createElement(
-                'li',
-                null,
-                _react2.default.createElement(
-                  'a',
-                  { onClick: this.logout },
-                  'Log Out'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
 
-  return NavBarLogin;
+    _createClass(NavBarLogin, [{
+        key: "login",
+        value: function login() {
+            this.props.auth.login();
+        }
+    }, {
+        key: "logout",
+        value: function logout() {
+            this.props.auth.logout();
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "nav",
+                { className: "navbar navbar-default navbar-fixed-top topnav", role: "navigation" },
+                _react2.default.createElement(
+                    "div",
+                    { className: "container topnav" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "navbar-header" },
+                        _react2.default.createElement(
+                            "button",
+                            { type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1" },
+                            _react2.default.createElement(
+                                "span",
+                                { className: "sr-only" },
+                                "Toggle navigation"
+                            ),
+                            _react2.default.createElement("span", { className: "icon-bar" }),
+                            _react2.default.createElement("span", { className: "icon-bar" }),
+                            _react2.default.createElement("span", { className: "icon-bar" })
+                        ),
+                        _react2.default.createElement(
+                            "a",
+                            { className: "navbar-brand topnav", href: "#" },
+                            "Syrup"
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1" },
+                        _react2.default.createElement(
+                            "ul",
+                            { className: "nav navbar-nav navbar-right" },
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { onClick: this.login },
+                                    "Log In"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                _react2.default.createElement(
+                                    "a",
+                                    { onClick: this.login },
+                                    "Sign Up"
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return NavBarLogin;
 }(_react2.default.Component);
-
-// import React from 'react';
-//  import Auth from '../Auth/Auth';
-
-//  const auth = new Auth();
-
-//  export default class NavBarLogin extends React.Component {
-//  	constructor(){
-//  		super();
-
-//  		this.login = this.login.bind(this);
-//  	}
-
-//  	login(){
-//  		auth.login();
-//  	}
-
-//  	render(){
-//  		return(
-//  			<nav className="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-//          		<div className="container topnav">
-//              		<div className="navbar-header">
-//                  		<button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-//  		                    <span className="sr-only">Toggle navigation</span>
-//  		                    <span className="icon-bar"></span>
-//  		                    <span className="icon-bar"></span>
-//  		                    <span className="icon-bar"></span>
-//                  		</button>
-//                  		<a className="navbar-brand topnav" href="#">Syrup</a>
-//              		</div>
-//              		<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-//                  		<ul className="nav navbar-nav navbar-right">
-//                      		<li>
-//                          		<a href="#login" onClick={this.login}>Log In</a>
-//                      		</li>
-//                      		<li>
-//                          		<a href="#signup">Sign Up</a>
-//                      		</li>
-//                  		</ul>
-//              		</div>
-//          		</div>
-//      		</nav>
-//  		);
-//  	}
-//  } 
-
 
 exports.default = NavBarLogin;
 
@@ -34393,62 +34358,30 @@ exports.default = valueEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// import React from 'react';
+// import { Switch, Route } from 'react-router-dom';
+// import HomePage from './HomePage';
+// import UploadPage from './UploadPage';
+// import ProfilePage from './ProfilePage'
+// import ownProfile from './ownProfile';
+// import Matches from './Matches';
+// import Messages from './Messages';
 
+// const Main = () => (
+//   <main>
+//     <Switch>
+//       <Route exact path='/' component={HomePage}/>
+//       <Route path='/upload' component={UploadPage}/>
+//       <Route path='/profile' component={ProfilePage}/>
+//       <Route path='/ownProfile' component={ownProfile}/>
+//       <Route path='/matches' component={Matches}/>
+//       <Route path='/messages' component={Messages}/>
+//     </Switch>
+//   </main>
+// )
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+// export default Main;
 
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(69);
-
-var _HomePage = __webpack_require__(119);
-
-var _HomePage2 = _interopRequireDefault(_HomePage);
-
-var _UploadPage = __webpack_require__(299);
-
-var _UploadPage2 = _interopRequireDefault(_UploadPage);
-
-var _ProfilePage = __webpack_require__(304);
-
-var _ProfilePage2 = _interopRequireDefault(_ProfilePage);
-
-var _ownProfile = __webpack_require__(325);
-
-var _ownProfile2 = _interopRequireDefault(_ownProfile);
-
-var _Matches = __webpack_require__(326);
-
-var _Matches2 = _interopRequireDefault(_Matches);
-
-var _Messages = __webpack_require__(126);
-
-var _Messages2 = _interopRequireDefault(_Messages);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Main = function Main() {
-  return _react2.default.createElement(
-    'main',
-    null,
-    _react2.default.createElement(
-      _reactRouterDom.Switch,
-      null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _HomePage2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/upload', component: _UploadPage2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/profile', component: _ProfilePage2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/ownProfile', component: _ownProfile2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/matches', component: _Matches2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/messages', component: _Messages2.default })
-    )
-  );
-};
-
-exports.default = Main;
 
 /***/ }),
 /* 275 */
@@ -36416,102 +36349,182 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(69);
 
+var _auth0Js = __webpack_require__(231);
+
+var _auth0Js2 = _interopRequireDefault(_auth0Js);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NavBar = function NavBar() {
-  return _react2.default.createElement(
-    'nav',
-    { className: 'navbar navbar-default navbar-fixed-top topnav', role: 'navigation' },
-    _react2.default.createElement(
-      'div',
-      { className: 'container topnav' },
-      _react2.default.createElement(
-        'div',
-        { className: 'navbar-header' },
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // import React from 'react';
+// import { Link } from 'react-router-dom';
+
+// const NavBar = () => (
+//   <nav className="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+//       <div className="container topnav">
+//           <div className="navbar-header">
+//               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+//                 <span className="sr-only">Toggle navigation</span>
+//                 <span className="icon-bar"></span>
+//                 <span className="icon-bar"></span>
+//                 <span className="icon-bar"></span>
+//               </button>
+//               <a className="navbar-brand topnav" href="#"><Link to='/'>Syrup</Link></a>
+//           </div>
+//           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+//             <ul className="nav navbar-nav navbar-right">
+//               <li><Link to='/matches'>Matches</Link></li>
+//               <li><Link to='/messages'>Messages</Link></li>
+//               <li><Link to='/upload'>Upload</Link></li>
+//               <li><Link to='/profile'>Profile</Link></li>
+//               <li><Link to='/ownProfile'>Edit Profile</Link></li>
+//               <li><Link to='/ownProfile'>Log Out</Link></li>
+
+//             </ul>
+//           </div>
+//       </div>
+//   </nav>
+// )
+
+// export default NavBar
+
+var NavBar = function (_Component) {
+  _inherits(NavBar, _Component);
+
+  function NavBar(props) {
+    _classCallCheck(this, NavBar);
+
+    var _this = _possibleConstructorReturn(this, (NavBar.__proto__ || Object.getPrototypeOf(NavBar)).call(this, props));
+
+    _this.login = _this.login.bind(_this);
+    _this.logout = _this.logout.bind(_this);
+    return _this;
+  }
+
+  _createClass(NavBar, [{
+    key: 'login',
+    value: function login() {
+      this.props.auth.login();
+    }
+  }, {
+    key: 'logout',
+    value: function logout() {
+      this.props.auth.logout();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'nav',
+        { className: 'navbar navbar-default navbar-fixed-top topnav', role: 'navigation' },
         _react2.default.createElement(
-          'button',
-          { type: 'button', className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1' },
+          'div',
+          { className: 'container topnav' },
           _react2.default.createElement(
-            'span',
-            { className: 'sr-only' },
-            'Toggle navigation'
+            'div',
+            { className: 'navbar-header' },
+            _react2.default.createElement(
+              'button',
+              { type: 'button', className: 'navbar-toggle', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1' },
+              _react2.default.createElement(
+                'span',
+                { className: 'sr-only' },
+                'Toggle navigation'
+              ),
+              _react2.default.createElement('span', { className: 'icon-bar' }),
+              _react2.default.createElement('span', { className: 'icon-bar' }),
+              _react2.default.createElement('span', { className: 'icon-bar' })
+            ),
+            _react2.default.createElement(
+              'a',
+              { className: 'navbar-brand topnav', href: '#' },
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/' },
+                'Syrup'
+              )
+            )
           ),
-          _react2.default.createElement('span', { className: 'icon-bar' }),
-          _react2.default.createElement('span', { className: 'icon-bar' }),
-          _react2.default.createElement('span', { className: 'icon-bar' })
-        ),
-        _react2.default.createElement(
-          'a',
-          { className: 'navbar-brand topnav', href: '#' },
           _react2.default.createElement(
-            _reactRouterDom.Link,
-            { to: '/' },
-            'Syrup'
+            'div',
+            { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
+            _react2.default.createElement(
+              'ul',
+              { className: 'nav navbar-nav navbar-right' },
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/matches' },
+                  'Matches'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/messages' },
+                  'Messages'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/upload' },
+                  'Upload'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/profile' },
+                  'Profile'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  _reactRouterDom.Link,
+                  { to: '/ownProfile' },
+                  'Edit Profile'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                  'a',
+                  { onClick: this.logout.bind(this) },
+                  'Log Out'
+                )
+              )
+            )
           )
         )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'collapse navbar-collapse', id: 'bs-example-navbar-collapse-1' },
-        _react2.default.createElement(
-          'ul',
-          { className: 'nav navbar-nav navbar-right' },
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/matches' },
-              'Matches'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/messages' },
-              'Messages'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/upload' },
-              'Upload'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/profile' },
-              'Profile'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/ownProfile' },
-              'Edit Profile'
-            )
-          )
-        )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return NavBar;
+}(_react.Component);
 
 exports.default = NavBar;
 
@@ -37894,6 +37907,10 @@ var _axios = __webpack_require__(120);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _NavBar = __webpack_require__(300);
+
+var _NavBar2 = _interopRequireDefault(_NavBar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -37960,6 +37977,7 @@ var ownProfile = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_NavBar2.default, null),
         _react2.default.createElement(
           'h1',
           null,
@@ -44322,7 +44340,7 @@ var MessageBox = function MessageBox(_ref) {
     'div',
     null,
     messages.map(function (message) {
-      _react2.default.createElement(_MessageEntry2.default, { message: message });
+      return _react2.default.createElement(_MessageEntry2.default, { message: message });
     })
   );
 };
@@ -44349,6 +44367,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var MessageEntry = function MessageEntry(_ref) {
   var message = _ref.message;
 
+  console.log('this is the messagentry', message);
   return _react2.default.createElement(
     'div',
     null,

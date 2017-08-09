@@ -5,7 +5,7 @@ const MessageBox = ({ messages }) => {
   return (
     <div>
       {messages.map(message => {
-        <MessageEntry message={message}/>
+        return <MessageEntry message={message}/>
       })}
     </div>
   );

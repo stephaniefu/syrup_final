@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import NavBar from './NavBar';
 
 class ownProfile extends Component {
   constructor(){
@@ -47,6 +48,7 @@ class ownProfile extends Component {
  render() {
     return (
       <div>
+      <NavBar />
         <h1>Own Profile</h1> 
         <input name="firstname" value={this.state.firstname} onChange={this.handleOnChange} placeholder="First Name"/>
         <input name="profilepic" value={this.state.profilepic} onChange={this.handleOnChange} placeholder="Profile Pic"/>
