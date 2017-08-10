@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import UploadPage from './UploadPage';
 import ProfilePage from './ProfilePage'
@@ -11,7 +11,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/' component={HomePage}/>
-      <Route path='/upload' component={UploadPage}/>
+      <Route path='/upload' component={(props) => <UploadPage history={history}/>}/>
       <Route path='/profile/:id' component={ProfilePage}/>
       <Route path='/ownProfile' component={ownProfile}/>
       <Route path='/matches' component={Matches}/>
@@ -20,4 +20,4 @@ const Main = () => (
   </main>
 )
 
-export default Main;
+export default withRouter(Main);

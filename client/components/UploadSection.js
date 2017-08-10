@@ -5,8 +5,8 @@ import apiKey from '../../apiKey';
 import MatchesUploadSection from './MatchesUploadSection';
 
 export default class UploadSection extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
         this.state = {
             input: '',
             isMatching: false,
@@ -70,13 +70,14 @@ export default class UploadSection extends React.Component {
         if(this.state.isMatching){
             return (
                 <div>
-                    <MatchesUploadSection matches={this.state.matches}/>
+                    <MatchesUploadSection matches={this.state.matches} history={this.props.history}/>
                 </div>        
             );
         }
     }
 
 	render(){
+        //console.log('props in US', this.props);
 		return(
             <div>
     			<div className="intro-header">

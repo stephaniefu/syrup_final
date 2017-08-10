@@ -5,15 +5,16 @@ import Footer from './Footer';
 import MatchesUploadSection from './MatchesUploadSection';
 
 export default class UploadPage extends React.Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 			<div>
 				<NavBar/>
-				<UploadSection/>
+				<UploadSection history={this.props.history}/>
 				
 				<Footer/>
 			</div>
