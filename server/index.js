@@ -20,6 +20,9 @@ app.use(express.static(path.join(__dirname, '../static')));
 app.use(cors());
 
 app.use('/api', routes);
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../static/index.html'))
+});
 
 app.listen(PORT, err => {
   if (err) {
