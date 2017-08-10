@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import history from '../history';
+import { Redirect } from 'react-router-dom';
 
 export default class Match extends React.Component{
 	constructor(props){
@@ -31,12 +33,22 @@ export default class Match extends React.Component{
 
 	renderProfile(){
 		console.log('This is rendering');
-		//axios.get(`api/profile/${this.state.id}`)
+		// return (
+		// 	<Redirect push to="/profile/this.state.id"/>
+		// );
+		history.push(`/profile/${this.state.id}`);
+		// axios.get(`api/profile/get/${this.state.id}`)
+		// 	.then(res => {
+		// 		console.log(res);
+		// 	})
+		// 	.catch(err => {
+		// 		console.log(err);
+		// 	})
 
 	}
 
 	render(){
-		//console.log('This is the props in Match: ', this.props.match);
+		console.log('This is the props in Match: ', this.props);
 		return (
 			<div className="col-sm-4 text-center match" onClick={this.renderProfile}>
 				<h2>{this.state.firstname}, {this.state.age}</h2>
