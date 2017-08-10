@@ -1,10 +1,10 @@
 import React from 'react';
 
-const MessageEntry = ({ message }) => {
+const MessageEntry = ({ message, firstname }) => {
   console.log('this is the messagentry', message)
   return (
     <div>
-      {message}
+      {firstname}: {message}
     </div>
   );
 };
