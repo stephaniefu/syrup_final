@@ -4,8 +4,8 @@ const griffController = require('../controller/griffController');
 
 // //Submiting a Face Photo 
 // router.post('/upload', controller.uploadPhoto);
-// //Connect with match
-// router.post('/matches', controller.connectMatch);
+//Connect with match
+router.post('/match/:id', controller.connectMatch);
 // //Getting all Matches
 // router.get('/matches', controller.getMatches);
 // //Getting Matches by %
@@ -30,6 +30,8 @@ router.get('/profile/:id', controller.getProfile);
 
 router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
 
+// verify match
+router.get('/match/:id', controller.verifyMatch);
 
 
 module.exports = router;

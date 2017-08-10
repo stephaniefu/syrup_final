@@ -12,7 +12,7 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={HomePage}/>
       <Route path='/upload' component={UploadPage}/>
-      <Route path='/profile' component={ProfilePage}/>
+      <Route path='/profile/:id' component={ProfilePage}/>
       <Route path='/ownProfile' component={ownProfile}/>
       <Route path='/matches' component={Matches}/>
       <Route path='/messages' component={Messages}/>

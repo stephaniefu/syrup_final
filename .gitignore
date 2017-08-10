@@ -1,9 +1,4 @@
 node_modules
-<<<<<<< HEAD
-static/bundle.js*
 ApiKey.js
-=======
-apiKey.js
 dbUrl.js
 static/bundle.js*
->>>>>>> finished basic func on upload page

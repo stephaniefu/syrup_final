@@ -1,5 +1,4 @@
 import React from 'react';
-// import NavBar from './NavBar';
 import ProfileHead from './ProfileHead';
 import ProfilePhotos from './ProfilePhotos';
 import axios from 'axios';
@@ -8,44 +7,56 @@ export default class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '1',
-      userData: {
-        "id": "1",
-        "firstname": "Selena",
-        "profilepic": "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
-        "images": [
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
-          "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet"
-        ],
-        "bio": "super rich and famous",
-        "gender": "female",
-        "age": "24"
-      }
+      id: this.props.match.params.id,
+      firstname: '',
+      profilepic: '',
+      images: [],
+      bio: '',
+      gender: '',
+      age: 0,
+      matched: false
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit() {
+    axios.post(`/api/match/${this.state.id}`)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(err => { if (err) {return console.error(err)} })
   }
 
   componentDidMount() {
-    axios.get(`http://127.0.0.1:8080/api/profile/${this.state.userId}`)
-    .then(response => {
-      // this.setState( userData = {
-      //   firstname: response.data.firstname,
-      //   profilepic: response.data.profilepic,
-      //   images: response.data.images,
-      //   bio: response.data.bio,
-      //   gender: response.data.gender,
-      //   age: response.data.age
-      // })
-    })
-    .catch(err => { if (err) { return console.error(err) } })
+    axios.all([
+      axios.get(`/api/profile/${this.state.id}`),
+      axios.get(`/api/match/${this.state.id}`)
+    ])
+    .then(axios.spread((profile, match) => {
+      var images = this.state.images;
+      profile.data.images.forEach(image => {
+        images.push(image);
+      })
+
+      this.setState({
+        firstname: profile.data.firstname,
+        profilepic: profile.data.profilepic,
+        images: images,
+        bio: profile.data.bio,
+        gender: profile.data.gender,
+        age: profile.data.age,
+        matched: match.data
+      })
+    }))
+    .catch(err => { return console.error(err) });
   }
 
   render() {
     return (
       <div className="intro-message">
-        <div className="profilePage">
-          <ProfileHead data={this.state.userData}/>
-          <ProfilePhotos images={this.state.userData.images}/>
+        <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />
+        <div className="photosContainer">
+          <ProfilePhotos images={this.state.images} />       
         </div>
       </div>
     );

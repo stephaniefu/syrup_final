@@ -5,19 +5,13 @@ export default class ProfilePhotos extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('^^^props^^^', this.props);
-  }
-
   render() {
     return (
-      <div>
-        <ul className="profilePhotos">
-          {this.props.images.map((image, index) => {
-            return <li className="profileli" key={index}><img src={image} width="300" height="300"/></li>
-          })}  
-        </ul>
-      </div>
+      <div className="row">
+        {this.props.images.map((image, index) => {
+          return <div className="col-sm-4 profilePhotos" key={index}><img src={image} width="200" height="200"/></div>
+        })}  
+      </div>          
     );
   }
 }
