@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0';
 import history from '../history';
+import axios from 'axios';
 
 export default class Auth {
   constructor() {
@@ -10,7 +11,7 @@ export default class Auth {
       redirectUri: AUTH_CONFIG.redirectUri,
       audience: `https://${AUTH_CONFIG.domain}/userinfo`,
       responseType: 'token id_token',
-      scope: 'openid'
+      scope: 'openid profile'
     });
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -19,7 +20,7 @@ export default class Auth {
   }
 
   login() {
-    this.auth0.authorize();
+    this.auth0.authorize()
   }
 
   handleAuthentication() {
@@ -27,10 +28,24 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log('this is your auth result', authResult)
+    axios.get('https://stephaniefu.auth0.com/userinfo', {
+      headers: {'Authorization': `Bearer ${authResult.accessToken}`}
+    })
+    .then(data => {
+      console.log(data)
+      axios.post('/api/profile', {
+        email: data.data.name
+      })
+      .then(()=> {
         this.setSession(authResult);
-        history.replace('/upload');
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+        // history.replace('/upload');
       } else if (err) {
-        history.replace('/upload');
+        // history.replace('/upload');
         console.log(err);
       }
     });

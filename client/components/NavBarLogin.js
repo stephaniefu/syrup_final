@@ -5,12 +5,15 @@ export default class NavBarLogin extends React.Component {
 	constructor(props){
 		super(props);
 
+		this.props.auth.handleAuthentication();
+		
+		
 		this.login = this.login.bind(this);
 		this.logout = this.logout.bind(this);
 	}
 
 	login(){
-		this.props.auth.login();
+		this.props.auth.login()
 	}
 
 	logout() {
@@ -18,6 +21,8 @@ export default class NavBarLogin extends React.Component {
 	}
 
 	render(){
+		// const { isAuthenticated } = this.props.auth;
+
 		return(
 			<nav className="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         		<div className="container topnav">
@@ -38,9 +43,6 @@ export default class NavBarLogin extends React.Component {
                     		<li>
                         		<a onClick={this.login}>Sign Up</a>
                     		</li>
-                    		{/* <li>
-                        		<a onClick={this.logout}>Log Out</a>
-                    		</li> */}
                 		</ul>
             		</div>
         		</div>
