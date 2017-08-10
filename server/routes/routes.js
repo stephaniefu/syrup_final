@@ -7,7 +7,7 @@ const griffController = require('../controller/griffController');
 //Connect with match
 router.post('/match/:id', controller.connectMatch);
 // //Getting all Matches
-// router.get('/matches', controller.getMatches);
+router.get('/matches/:userId', controller.getMatches);
 // //Getting Matches by %
 // router.get('/matches/percent', controller.getMatchesByPercent);
 // //Getting Matches by recent
