@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // import React from 'react';
 // import { Switch, Route } from 'react-router-dom';
 // import HomePage from './HomePage';
@@ -22,7 +21,6 @@
 // )
 
 // export default Main;
-=======
 import React from 'react';
 import { BrowserRouter, Switch, Route, withRouter } from 'react-router-dom';
 import HomePage from './HomePage';
@@ -46,4 +44,3 @@ const Main = () => (
 )
 
 export default withRouter(Main);
->>>>>>> origin
