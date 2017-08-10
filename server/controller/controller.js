@@ -27,7 +27,6 @@ module.exports = {
   })
   },
 
-<<<<<<< HEAD
   saveMessages: (req, res) => {
     Model.Message.create({
       text: req.body.text,
@@ -36,7 +35,6 @@ module.exports = {
     })
     .then(data => {
       res.status(200).send(data)
-=======
   getProfile: (req, res) => {
     Model.User.findById(req.params.id)
     .then(response => {
@@ -44,7 +42,8 @@ module.exports = {
       //res.redirect(`/profile/${req.params.id}`);
     })
     .catch(err => { if (err) {console.error(err) } })
-  },
+  }
+},
 
   renderClickedProfile: (req, res) => {
     res.redirect(`/#/profile/${req.params.id}`);
@@ -77,10 +76,9 @@ module.exports = {
       } else {
         res.send('false')
       }
->>>>>>> origin
     })
     .catch(err => {
       res.status(404).send(err)
     })
   }
-};
+}
