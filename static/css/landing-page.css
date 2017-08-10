@@ -273,3 +273,13 @@ h1 {
 .cardButton:hover, .profileButton:hover {
     opacity: 0.7;
 }
+
+.profileButton {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+.cardButton:hover, .profileButton:hover {
+    opacity: 0.7;
+}
