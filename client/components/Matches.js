@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from './NavBar';
 
 export default class Matches extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export default class Matches extends React.Component {
   render() {
     return (
       <div className="intro-message">
+        <NavBar />
         <h1>This is the matches page!</h1>
       </div>
     );
