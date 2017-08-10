@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileHead from './ProfileHead';
 import ProfilePhotos from './ProfilePhotos';
+import NavBar from './NavBar';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
@@ -56,6 +57,7 @@ import { withRouter } from 'react-router-dom';
     return(<div>Hello?</div>);
     // return (
     //   <div className="intro-message">
+    //     <NavBar />
     //     <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />
     //     <div className="photosContainer">
     //       <ProfilePhotos images={this.state.images} />       

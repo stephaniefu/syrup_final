@@ -1,5 +1,6 @@
 import React from 'react';
 import MessageBox from './MessageBox';
+import NavBar from './NavBar';
 import SocketIsockOClient from 'socket.io-client';
 import axios from 'axios';
 
@@ -47,17 +48,21 @@ export default class Messages extends React.Component {
   handleOnSend(e){
     e.preventDefault();
     this.socket.emit('send message', this.state.text)
+    this.setState({
+      text: ''
+    })
   }
 
   render() {
     return (
       <div className="intro-message">
+        <NavBar />
         <h1>This is the messages page!</h1>
         <div style={divStyle} >
         <MessageBox messages={this.state.messages}/>
         </div>
          <form>
-           <input name="message" value={this.state.message} onChange={this.handleOnChange}/>
+           <input name="message" value={this.state.text} onChange={this.handleOnChange}/>
            <button onClick={this.handleOnSend}>Send</button>
         </form>
       </div>
