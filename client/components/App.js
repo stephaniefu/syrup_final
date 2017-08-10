@@ -13,12 +13,15 @@ import history from '../history';
 
 const auth = new Auth();
 
-const handleAuthentication = (nextState, replace) => {
-	console.log('arguments', arguments);
-  if (/access_token|id_token|error/.test(nextState.location.hash)) {
-    auth.handleAuthentication();
-  }
-}
+// const handleAuthentication = (nextState, replace) => {
+// 	console.log('arguments', arguments);
+//   if (/access_token|id_token|error/.test(nextState.location.hash)) {
+// 		auth.handleAuthentication()
+// 		.then((res) => {
+// 			console.log(res)
+// 		})
+//   }
+// }
 
 const App = () => {
 	if(auth.isAuthenticated()) {
