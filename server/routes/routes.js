@@ -26,5 +26,8 @@ router.post('/profile', controller.addProfile);
 // get individual profile
 router.get('/profile/:id', controller.getProfile);
 
+// verify match
+router.get('/match/:id', controller.verifyMatch);
+
 
 module.exports = router;

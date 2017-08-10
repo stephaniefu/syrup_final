@@ -40,5 +40,24 @@ module.exports = {
     .catch(err => {
       res.status(404).send(err)
     })
+  },
+
+  verifyMatch: (req, res) => {
+    Model.Match.findAll({
+      where: {
+        userId: 3,
+        matcheeId: req.params.id
+      }
+    })
+    .then(response => {
+      if (response.length) {
+        res.send('true')
+      } else {
+        res.send('false')
+      }
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
   }
 };
