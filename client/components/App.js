@@ -40,10 +40,10 @@ const App = () => {
       <Route exact path='/ownProfile' component={ownProfile}/>
       <Route exact path='/matches' component={Matches}/>
       <Route exact path='/messages' component={Messages}/>
-			 <Route path='/callback' render={(props) => {
+			 {/* <Route path='/callback' render={(props) => {
 				console.log('youre in callback path')
 				handleAuthentication(props);
-				return <UploadPage auth={auth}/>;
+				return <UploadPage auth={auth}/>; */}
 			}}/> 
     </Switch>
 		</div>

@@ -3,17 +3,13 @@ const db = require('../index');
 
 
 const User = db.define('user', {
-  nickname: {
-    type: Sequelize.STRING,
-    allowNull: true
+  id: {
+    type:Sequelize.STRING,
+    primaryKey: true,
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  password: {
-    type: Sequelize.STRING,
-    allowNull: true
   },
   firstname: {
     type: Sequelize.STRING,

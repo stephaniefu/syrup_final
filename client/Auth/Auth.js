@@ -28,13 +28,14 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log('this is your auth result', authResult)
-    axios.get('https://stephaniefu.auth0.com/userinfo', {
-      headers: {'Authorization': `Bearer ${authResult.accessToken}`}
-    })
-    .then(data => {
+        axios.get('https://stephaniefu.auth0.com/userinfo', {
+          headers: {'Authorization': `Bearer ${authResult.accessToken}`}
+        })
+    .then(({ data }) => {
       console.log(data)
       axios.post('/api/profile', {
-        email: data.data.name
+        email: data.name,
+        id: data.sub
       })
       .then(()=> {
         this.setSession(authResult);

@@ -3,9 +3,11 @@ const express = require('express');
 const Model = require('../../db/models/model');
 module.exports = {
   addProfile: (req, res) => {
+    console.log('this is the req.body ', req.body)
     Model.User.findOrCreate({
-      where: {email: req.body.email}, defaults: {
-        // email: req.body.email,
+      where: {id: req.body.id}, defaults: {
+        id: req.body.id,
+        email: req.body.email,
         firstname: req.body.firstname,
         age: req.body.age,
         gender: req.body.gender,
