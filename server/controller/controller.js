@@ -85,5 +85,21 @@ module.exports = {
     .catch(err => {
       res.status(404).send(err)
     })
+  },
+
+  getMatches: (req, res) => {
+    Model.Match.findAll({
+      where: { userId: req.params.userId },
+      include:[{
+        model: Model.User, as: 'matchee',
+        // attributes: ['firstname']
+      }]
+    })
+      .then(match => {
+        res.status(202).send(match);
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
   }
 }
