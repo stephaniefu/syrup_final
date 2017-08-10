@@ -201,28 +201,8 @@ h1 {
 }
 
 .profilePhotos {
-    width: 75%;
-    list-style-type: none;
-    margin: auto;
-    padding: 0;
-    overflow: hidden;
+    padding-bottom: 40px;
 }
-
-.profileli {
-    display: block;
-    width: 25%;
-    text-align: center;
-    text-decoration: none;
-} 
-
-/* .profileHead {
-    width: 40%;
-    margin: 0 auto;
-} */
-
-/* profilePage
-profileImg
-profileInfo */
 
 #uploading-message{
     position: relative;
@@ -248,7 +228,7 @@ profileInfo */
 }
 
 .profileCard {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
     max-width: 300px;
     margin: auto;
     text-align: center;
@@ -266,7 +246,7 @@ profileInfo */
     font-size: 18px;
 }
 
-.cardButton {
+.cardButton, .cardButtonMatched {
     border: none;
     outline: 0;
     display: inline-block;
@@ -277,6 +257,11 @@ profileInfo */
     cursor: pointer;
     width: 100%;
     font-size: 18px;
+}
+
+.cardButtonMatched {
+    background-color: #A9A9A9;
+    cursor: default;
 }
 
 .profileButton {

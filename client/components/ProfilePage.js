@@ -1,5 +1,4 @@
 import React from 'react';
-// import NavBar from './NavBar';
 import ProfileHead from './ProfileHead';
 import ProfilePhotos from './ProfilePhotos';
 import axios from 'axios';
@@ -29,31 +28,34 @@ export default class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/profile/${this.state.id}`)
-    .then(response => {
-      
+    axios.all([
+      axios.get(`/api/profile/${this.state.id}`),
+      axios.get(`/api/match/${this.state.id}`)
+    ])
+    .then(axios.spread((profile, match) => {
       var images = this.state.images;
-      response.data.images.forEach(image => {
+      profile.data.images.forEach(image => {
         images.push(image);
       })
 
       this.setState({
-        firstname: response.data.firstname,
-        profilepic: response.data.profilepic,
+        firstname: profile.data.firstname,
+        profilepic: profile.data.profilepic,
         images: images,
-        bio: response.data.bio,
-        gender: response.data.gender,
-        age: response.data.age
+        bio: profile.data.bio,
+        gender: profile.data.gender,
+        age: profile.data.age,
+        matched: match.data
       })
-    })
-    .catch(err => { if (err) { return console.error(err) } })
+    }))
+    .catch(err => { return console.error(err) });
   }
 
   render() {
     return (
       <div className="intro-message">
-        <div className="profilePage">
-          <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />        
+        <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />
+        <div className="photosContainer">
           <ProfilePhotos images={this.state.images} />       
         </div>
       </div>

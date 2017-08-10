@@ -30,6 +30,8 @@ router.get('/profile/:id', controller.getProfile);
 
 router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
 
+// verify match
+router.get('/match/:id', controller.verifyMatch);
 
 
 module.exports = router;
