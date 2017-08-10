@@ -17,7 +17,6 @@ const User = db.define('user', {
     allowNull: true
   },
   profilepic: {
-<<<<<<< HEAD
     type: Sequelize.STRING,
     allowNull: true
   },
@@ -28,19 +27,6 @@ const User = db.define('user', {
   bio: {
     type: Sequelize.STRING,
     allowNull: true
-=======
-    type: Sequelize.TEXT,
-    allowNull: false
-  },
-  images: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    // type: Sequelize.ARRAY,
-    allowNull: false
-  },
-  bio: {
-    type: Sequelize.TEXT,
-    allowNull: false
->>>>>>> origin
   },
   gender: {
     type: Sequelize.STRING,
