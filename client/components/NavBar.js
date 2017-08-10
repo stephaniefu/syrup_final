@@ -66,7 +66,7 @@ class NavBar extends Component {
               <li><Link to='/upload'>Upload</Link></li>
               <li><Link to='/profile'>Profile</Link></li>
               <li><Link to='/ownProfile'>Edit Profile</Link></li>
-               {console.log('this is the propsasdff', this.props.auth)} 
+               {/* {console.log('this is the propsasdff', this.props.auth)}  */}
               <li><a onClick={this.logout}>Log Out</a></li>
             </ul>
           </div>

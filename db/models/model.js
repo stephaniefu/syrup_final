@@ -88,8 +88,8 @@ User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
 //         {id: '16',firstname: 'alyssa', email: 'asdasdffff@gmail.com', profilepic: 'https://images.pexels.com/photos/59552/pexels-photo-59552.png?h=350&auto=compress&cs=tinysrgb', images: [], bio: 'I am a big dummy user', gender: 'female', age: 21,}
 //       ])
 //   })
-Match.sync();
-Message.sync();
+// Match.sync();
+// Message.sync();
 
 // Match.sync({force: true})
 //   .then(() => {

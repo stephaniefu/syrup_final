@@ -1,11 +1,11 @@
 import React from 'react';
 import MessageEntry from './MessageEntry';
 
-const MessageBox = ({ messages }) => {
+const MessageBox = ({ messages, firstname }) => {
   return (
     <div>
       {messages.map(message => {
-        return <MessageEntry message={message}/>
+        return <MessageEntry firstname={firstname} message={message}/>
       })}
     </div>
   );
