@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBarLogin from './NavBarLogin';
 import Main from './Main';
+<<<<<<< HEAD
 import Messages from './Messages';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
@@ -29,6 +30,12 @@ const App = () => {
 	}
 
 	return (
+=======
+
+const App = (props) => {
+	console.log(props);
+	return(
+>>>>>>> origin
 	<div>
 		<BrowserRouter history={history}>
 			<div>
@@ -49,7 +56,11 @@ const App = () => {
 		</div>
 		</BrowserRouter>
 	</div>
+<<<<<<< HEAD
 	)
+=======
+	);
+>>>>>>> origin
 }
 
 export default App

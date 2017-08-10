@@ -7,10 +7,11 @@ export default class ProfilePhotos extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4>Profile Photos Component</h4>
-        <h4>props: {this.props.user}</h4>
-      </div>
+      <div className="row">
+        {this.props.images.map((image, index) => {
+          return <div className="col-sm-4 profilePhotos" key={index}><img src={image} width="200" height="200"/></div>
+        })}  
+      </div>          
     );
   }
 }

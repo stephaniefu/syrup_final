@@ -1,0 +1,43 @@
+[
+  {
+    "id": "1",
+    "firstname": "Selena",
+    "profilepic": "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+    "images": [
+      "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
+      "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
+      "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet"
+    ],
+    "bio": "super rich and famous",
+    "gender": "female",
+    "age": "24"
+  },
+  {
+    "id": "2",
+    "firstname": "Melena",
+    "profilepic": "https://media.glamour.com/photos/58792917822a37aa336309bb/master/pass/SELENA%20GOMEZ.jpg?mbid=social_retweet",
+    "images": [
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000",
+      "https://peopledotcom.files.wordpress.com/2017/02/selena-gomez-2000.jpg?w=2000&h=2000"
+    ],
+    "bio": "just as rich and famous",
+    "gender": "female",
+    "age": "25"
+  },
+  {
+    "id": "3",
+    "firstname": "Harold",
+    "profilepic": "https://pbs.twimg.com/profile_images/673560564895846400/eOjzhHQl.png",
+    "images": [
+      "https://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg",
+      "https://www.suttonsilver.co.uk/wp-content/uploads/blog-harold-02.jpg"
+    ],
+    "bio": "im a meme",
+    "gender": "male",
+    "age": "65"
+  }
+]
