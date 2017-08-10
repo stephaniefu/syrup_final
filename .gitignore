@@ -1,4 +1,4 @@
 node_modules
-apiKey.js
-dbUrl.js
-static/bundle.js*
+bundle.js*
+ApiKey.js
+.env

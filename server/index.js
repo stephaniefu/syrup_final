@@ -5,12 +5,17 @@ const db = require('../db');
 const model = require('../db/models/model');
 const routes = require('./routes/routes');
 const path = require('path');
+<<<<<<< HEAD
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+=======
 const cors = require('cors');
 //routes, model
+>>>>>>> origin
 
 const PORT = 8080;
 
-const app = express();
 
 app.use(parser.json());
 app.use(parser.urlencoded( {extended: true }));
@@ -21,14 +26,33 @@ app.use(cors());
 
 app.use('/api', routes);
 app.get('*', (req, res) => {
+<<<<<<< HEAD
+  res.sendFile(path.join(__dirname, '../static/index.html'))
+=======
 	console.log('Hitting');
 	res.sendFile(path.join(__dirname, '../static/index.html'))
+>>>>>>> origin
 });
 
-app.listen(PORT, err => {
+// socket.io
+server.listen(PORT, err => {
   if (err) {
-    console.log(`Could not connect to PORT ${PORT}`, err)
+    console.log(err)
   } else {
     console.log(`Successfully connected to PORT ${PORT}`)
   }
 });
+
+io.on('connection', socket => {
+    console.log('a user connected', socket.id);
+      socket.on('disconnect', () => {
+       console.log('user disconnected')
+});
+
+socket.on('send message', msg => {
+  console.log('message: ' + msg)
+  io.sockets.emit('chat message', msg);
+})
+
+
+})

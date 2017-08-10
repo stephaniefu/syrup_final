@@ -2,12 +2,33 @@ const Sequelize = require('sequelize');
 const db = require('../index');
 const data = require('../../data.json');
 
+
 const User = db.define('user', {
-  firstname: {
+  id: {
+    type:Sequelize.STRING,
+    primaryKey: true,
+  },
+  email: {
     type: Sequelize.STRING,
     allowNull: false
   },
+  firstname: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   profilepic: {
+<<<<<<< HEAD
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  images: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: true
+  },
+  bio: {
+    type: Sequelize.STRING,
+    allowNull: true
+=======
     type: Sequelize.TEXT,
     allowNull: false
   },
@@ -19,14 +40,15 @@ const User = db.define('user', {
   bio: {
     type: Sequelize.TEXT,
     allowNull: false
+>>>>>>> origin
   },
   gender: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   age: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: true
   }
 }, {
   timestamps: false
