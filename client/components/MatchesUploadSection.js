@@ -19,7 +19,7 @@ export default class MatchesUploadSection extends React.Component {
 		            </div>
 		            	<div className="row">
 		            		{this.props.matches.map((match, i) => 
-		            			(<Match match={match} key={i}/>)
+		            			(<Match match={match} history={this.props.history} key={i}/>)
 		            		)}
 		            	</div>
 		        </div>

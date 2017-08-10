@@ -27,6 +27,7 @@ router.post('/profile', controller.addProfile);
 
 // get individual profile
 router.get('/profile/:id', controller.getProfile);
+router.get('/profile/get/:id', controller.renderClickedProfile);
 
 router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
 

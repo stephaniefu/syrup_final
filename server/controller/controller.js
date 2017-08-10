@@ -25,8 +25,14 @@ module.exports = {
     Model.User.findById(req.params.id)
     .then(response => {
       res.send(response);
+      //res.redirect(`/profile/${req.params.id}`);
     })
     .catch(err => { if (err) {console.error(err) } })
+  },
+
+  renderClickedProfile: (req, res) => {
+    res.redirect(`/#/profile/${req.params.id}`);
+    console.log('ThIus is the id: ', req.params.id);
   },
 
   connectMatch: (req, res) => {
