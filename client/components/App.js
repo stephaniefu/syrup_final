@@ -3,7 +3,7 @@ import NavBarLogin from './NavBarLogin';
 import NavBar from './NavBar';
 import Main from './Main';
 import Messages from './Messages';
-import { Switch, Route, BrowserRouter, withRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import UploadPage from './UploadPage';
 import LandingPage from './LandingPage';
@@ -40,13 +40,12 @@ const App = () => {
 		<Switch>
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/upload' component={UploadPage}/>
-      <Route exact path='/profile' component={ProfilePage}/>
-      <Route exact path='/ownProfile' component={ownProfile}/>
+      <Route exact path='/profile' component={ownProfile}/>
+      {/* <Route exact path='/ownProfile' component={ownProfile}/> */}
       <Route exact path='/matches' component={Matches}/>
       <Route exact path='/messages' component={Messages}/>
-      <Route exact path='/messages' component={Messages}/>
       <Route exact path='/editProfile' component={editProfile}/>
-      <Route exact path='/:id' component={ProfilePage}/>
+      <Route path='/:id' component={ProfilePage}/>
     </Switch>
 		</div>
 		</BrowserRouter>
