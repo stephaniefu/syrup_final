@@ -12,8 +12,8 @@ router.get('/matches/:userId', controller.getMatches);
 // router.get('/matches/percent', controller.getMatchesByPercent);
 // //Getting Matches by recent
 // router.get('/matches/recent', controller.getMatchesByRecent);
-// //Add personal info
-router.post('/profile', controller.addProfile);
+// //Add personal info *********CHANGEDDDD*********
+router.post('/addProfile', controller.addProfile);
 // //Edit personali info
 // router.put('/profile/:id', controller.editProfile);
 // //Upload profile pic
@@ -37,5 +37,6 @@ router.get('/match/:id', controller.verifyMatch);
 // get user id from auth0
 // router.get('/user/:idToken', controller.getOneUser);
 
-
+//upload photo*****CHAGNGEDD******
+router.post('/photos', controller.uploadUserPhotos);
 module.exports = router;
