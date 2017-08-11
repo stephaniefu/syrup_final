@@ -58,10 +58,14 @@ export default class Messages extends React.Component {
   }
 
   handleOnSend(e){
+    console.log('asdlfkjas;kldfj', localStorage)
     e.preventDefault();
     this.socket.emit('send message', this.state.text)
     this.setState({
       text: ''
+    })
+    axios.post(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/google-oauth2|110881503556851462946`, {
+      text: this.state.text
     })
   }
 
@@ -75,6 +79,7 @@ export default class Messages extends React.Component {
   }
 
   render() {
+    console.log('this is your local storage', localStorage);
     return (
       <div className="intro-message">
         <NavBar />

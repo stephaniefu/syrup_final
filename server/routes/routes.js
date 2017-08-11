@@ -34,5 +34,8 @@ router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
 // verify match
 router.get('/match/:id', controller.verifyMatch);
 
+// get user id from auth0
+// router.get('/user/:idToken', controller.getOneUser);
+
 
 module.exports = router;
