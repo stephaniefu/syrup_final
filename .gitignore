@@ -2,3 +2,5 @@ node_modules
 bundle.js*
 ApiKey.js
 .env
+dbUrl.js
+static/bundle.js*
