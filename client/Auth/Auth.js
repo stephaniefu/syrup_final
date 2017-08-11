@@ -32,6 +32,9 @@ export default class Auth {
           headers: {'Authorization': `Bearer ${authResult.accessToken}`}
         })
     .then(({ data }) => {
+      console.log('this is the data', data)
+      console.log('this is the datan', data.name)
+      console.log('this is the datas', data.sub)
       axios.post('/api/profile', {
         email: data.name,
         id: data.sub

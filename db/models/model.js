@@ -5,7 +5,7 @@ const data = require('../../data.json');
 
 const User = db.define('user', {
   id: {
-    type:Sequelize.STRING,
+    type: Sequelize.STRING,
     primaryKey: true,
   },
   email: {
@@ -89,6 +89,7 @@ User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
 //       ])
 //    })
 User.sync();
+// User.sync({force: true});
 Match.sync();
 Message.sync();
 
