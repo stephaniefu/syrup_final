@@ -283,3 +283,33 @@ h1 {
 .cardButton:hover, .profileButton:hover {
     opacity: 0.7;
 }
+
+.photoUploadContainer {
+    display: inline-block;
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    left: 20%;
+    top: -66px;
+}
+
+.editContainer {
+    display: inline-block;
+    border: 1px solid black;
+    margin: auto;
+    position: relative;
+    top: 150px;
+    left: 15%;
+    width: 40%;
+}
+
+.updateButtonContainer {
+    width: 50%;
+    margin: auto;
+}
+
+.edit-profile {
+    position: relative;
+    top: 125px;
+    margin-left: 19%;
+}

@@ -102,4 +102,7 @@ module.exports = {
         res.status(404).send(err);
       })
   },
+  uploadUserPhotos: (req, res) => {
+    res.send('OK');
+  }
 }
