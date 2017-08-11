@@ -7,7 +7,7 @@ const griffController = require('../controller/griffController');
 //Connect with match
 router.post('/match/:id', controller.connectMatch);
 // //Getting all Matches
-// router.get('/matches', controller.getMatches);
+router.get('/matches/:userId', controller.getMatches);
 // //Getting Matches by %
 // router.get('/matches/percent', controller.getMatchesByPercent);
 // //Getting Matches by recent
@@ -33,6 +33,9 @@ router.get('/matches/percent/:subject_id', griffController.getMatchesByPercent);
 
 // verify match
 router.get('/match/:id', controller.verifyMatch);
+
+// get user id from auth0
+// router.get('/user/:idToken', controller.getOneUser);
 
 
 module.exports = router;

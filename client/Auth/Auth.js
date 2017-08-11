@@ -32,10 +32,13 @@ export default class Auth {
           headers: {'Authorization': `Bearer ${authResult.accessToken}`}
         })
     .then(({ data }) => {
-      console.log(data)
       axios.post('/api/profile', {
         email: data.name,
         id: data.sub
+      })
+      .then(res => {
+        console.log('asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfsdafasdfasdf',res);
+        // axios.get('/api/')
       })
       .then(()=> {
         this.setSession(authResult);
@@ -59,7 +62,12 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
+    console.log('HERE IS TYPE') 
+    console.log('HERE IS TYPE', authResult.idTokenPayload['sub'])
+    localStorage.setItem('idTokenPayload', authResult.idTokenPayload['sub'])
+    // localStorage.setItem('idTokenPayload', authResult.idTokenPayload[0])
+    // console.log('this is the authResesult', JSON.parse(authResult)) 
+// navigate to the home route
     history.replace('/upload');
   }
 
@@ -69,7 +77,7 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/');
   }
 
   isAuthenticated() {

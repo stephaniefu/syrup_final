@@ -38,16 +38,12 @@ class NavBar extends Component {
   constructor(props){
 		super(props);
 
-		this.login = this.login.bind(this);
 		this.logout = this.logout.bind(this);
 	}
 
-	login(){
-		this.props.auth.login();
-	}
-
-	logout() {
-		this.props.auth.logout();
+	logout(auth) {
+    console.log('youre in logout')
+		auth.logout();
 	}
 
 
@@ -71,7 +67,8 @@ class NavBar extends Component {
               <li><Link to='/upload'>Upload</Link></li>
               <li><Link to='/profile'>Profile</Link></li>
               <li><Link to='/ownProfile'>Edit Profile</Link></li>
-              <li><a onClick={this.logout.bind(this)}>Log Out</a></li>
+               {/* {console.log('this is the propsasdff', this.props.auth)}  */}
+              <li><a onClick={() => this.logout(this.props.auth)}>Log Out</a></li>
             </ul>
           </div>
       </div>

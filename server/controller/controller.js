@@ -27,7 +27,6 @@ module.exports = {
   })
   },
 
-<<<<<<< HEAD
   saveMessages: (req, res) => {
     Model.Message.create({
       text: req.body.text,
@@ -36,7 +35,12 @@ module.exports = {
     })
     .then(data => {
       res.status(200).send(data)
-=======
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
+  },
+
   getProfile: (req, res) => {
     Model.User.findById(req.params.id)
     .then(response => {
@@ -77,10 +81,25 @@ module.exports = {
       } else {
         res.send('false')
       }
->>>>>>> origin
     })
     .catch(err => {
       res.status(404).send(err)
     })
-  }
-};
+  },
+
+  getMatches: (req, res) => {
+    Model.Match.findAll({
+      where: { userId: req.params.userId },
+      include:[{
+        model: Model.User, as: 'matchee',
+        // attributes: ['firstname']
+      }]
+    })
+      .then(match => {
+        res.status(202).send(match);
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
+  },
+}

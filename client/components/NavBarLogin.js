@@ -39,6 +39,7 @@ export default class NavBarLogin extends React.Component {
                 		<ul className="nav navbar-nav navbar-right">
                     		<li>
                         		<a onClick={this.login}>Log In</a>
+														{console.log('this is the props', this.props.auth)}
                     		</li>
                     		<li>
                         		<a onClick={this.login}>Sign Up</a>

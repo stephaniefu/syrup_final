@@ -1,11 +1,12 @@
 import React from 'react';
 import NavBarLogin from './NavBarLogin';
+import NavBar from './NavBar';
 import Main from './Main';
-<<<<<<< HEAD
 import Messages from './Messages';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import UploadPage from './UploadPage';
+import LandingPage from './LandingPage';
 import ProfilePage from './ProfilePage'
 import ownProfile from './ownProfile';
 import Matches from './Matches';
@@ -30,16 +31,15 @@ const App = () => {
 	}
 
 	return (
-=======
 
-const App = (props) => {
-	console.log(props);
-	return(
->>>>>>> origin
+// const App = (props) => {
+// 	console.log(props);
+// 	return(
 	<div>
 		<BrowserRouter history={history}>
 			<div>
-		<NavBarLogin auth={auth}/> 
+		{auth.isAuthenticated() ? <NavBar auth={auth} /> : <LandingPage auth={auth}/> }
+		  {/* <NavBar auth={auth}/>    */}
 		<Switch>
       <Route exact path='/' component={HomePage}/>
       <Route exact path='/upload' component={UploadPage}/>
@@ -56,11 +56,7 @@ const App = (props) => {
 		</div>
 		</BrowserRouter>
 	</div>
-<<<<<<< HEAD
 	)
-=======
-	);
->>>>>>> origin
 }
 
 export default App
