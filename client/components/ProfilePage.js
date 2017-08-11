@@ -1,6 +1,7 @@
 import React from 'react';
 import ProfileHead from './ProfileHead';
 import ProfilePhotos from './ProfilePhotos';
+import NavBar from './NavBar';
 import axios from 'axios';
 
 export default class ProfilePage extends React.Component {
