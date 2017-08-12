@@ -121,6 +121,26 @@ class editProfile extends Component {
     })
   }
 
+ handleOnUpdate() {
+    console.log(this.state);
+    axios.put(`/api/updateProfile/${localStorage.idTokenPayload}`, {
+      firstname: this.state.firstname,
+      profilepic: this.state.profilepic,
+      images: this.state.images,
+      bio: this.state.bio,
+      gender: this.state.gender,
+      age: this.state.age
+    })
+    .then(() => {
+      console.log('success')
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+
+
   render() {
     return (
       <div className="container bootstrap snippets edit-profile">
