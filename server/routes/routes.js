@@ -13,7 +13,7 @@ router.get('/matches/:userId', controller.getMatches);
 // //Getting Matches by recent
 // router.get('/matches/recent', controller.getMatchesByRecent);
 // //Add personal info *********CHANGEDDDD*********
-router.post('/addProfile', controller.addProfile);
+router.post('/profile', controller.addProfile);
 // //Edit personali info
 // router.put('/profile/:id', controller.editProfile);
 // //Upload profile pic
@@ -39,4 +39,7 @@ router.get('/match/:id', controller.verifyMatch);
 
 //upload photo*****CHAGNGEDD******
 router.post('/photos', controller.uploadUserPhotos);
+
+router.put('/updateProfile/:id', controller.updateProfile);
+
 module.exports = router;

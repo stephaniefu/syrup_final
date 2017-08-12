@@ -104,5 +104,22 @@ module.exports = {
   },
   uploadUserPhotos: (req, res) => {
     res.send('OK');
+  },
+
+  updateProfile: (req, res) => {
+    Model.User.update({
+      firstname: req.body.firstname,
+      age: req.body.age,
+      gender: req.body.gender,
+      bio: req.body.bio,
+      profilepic: req.body.profilepic,
+      images: req.body.images
+    }, {where: {id: req.params.id}, returning: true})
+      .then(update => {
+        res.status(202).send(update);
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
   }
 }

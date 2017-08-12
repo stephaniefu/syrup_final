@@ -102,24 +102,44 @@ class editProfile extends Component {
     })
   }
 
-  handleOnUpdate() {
-    console.log(this.state);
-    axios.post('/api/addProfile', this.state)
-    .then(() => {
-      this.setState({
-        firstname: '',
-        profilepic: '',
-        images: [],
-        bio: '',
-        gender: '',
-        age: '',
-        uploadedProfile: null,
-        uploadedProfileCloudinaryUrl: '',
-        uploadedFile: null,
-        uploadedFileCloudinaryUrl: ''
-      })
+  // handleOnUpdate() {
+  //   console.log(this.state);
+  //   axios.post('/api/profile', this.state)
+  //   .then(() => {
+  //     this.setState({
+  //       firstname: '',
+  //       profilepic: '',
+  //       images: [],
+  //       bio: '',
+  //       gender: '',
+  //       age: '',
+  //       uploadedProfile: null,
+  //       uploadedProfileCloudinaryUrl: '',
+  //       uploadedFile: null,
+  //       uploadedFileCloudinaryUrl: ''
+  //     })
+  //   })
+  // }
+
+ handleOnUpdate() {
+    console.log('inhandleOnUPDateWOOT');
+    axios.put(`/api/updateProfile/${localStorage.idTokenPayload}`, {
+      firstname: this.state.firstname,
+      profilepic: this.state.profilepic,
+      images: this.state.images,
+      bio: this.state.bio,
+      gender: this.state.gender,
+      age: this.state.age
+    })
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
     })
   }
+
+
 
   render() {
     return (
