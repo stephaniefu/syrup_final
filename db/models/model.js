@@ -91,7 +91,8 @@ User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
 User.sync();
 // User.sync({force: true});
 Match.sync();
-Message.sync();
+// Message.sync();
+Message.sync({force: true});
 
 // Match.sync({force: true})
 //   .then(() => {

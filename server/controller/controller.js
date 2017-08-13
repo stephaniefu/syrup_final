@@ -5,7 +5,7 @@ const data = require('../../data');
 
 module.exports = {
   addProfile: (req, res) => {
-    console.log('this is the req.body ', req.body)
+    console.log('this is the req.body ', req.body.id)
     Model.User.findOrCreate({
       where: {id: req.body.id}, defaults: {
         id: req.body.id,
@@ -30,8 +30,8 @@ module.exports = {
   saveMessages: (req, res) => {
     Model.Message.create({
       text: req.body.text,
-      userid: req.params.userid,
-      recipientid: req.params.recipientid
+      userId: req.params.userId,
+      recipientId: req.params.recipientId
     })
     .then(data => {
       res.status(200).send(data)

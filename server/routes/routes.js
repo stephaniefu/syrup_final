@@ -23,7 +23,7 @@ router.post('/profile', controller.addProfile);
 // //Getting individual messages
 // router.get('/message/:id', controller.getMessageByUser);
 // //Storing messages in DB
-router.post('/message/:userid/:recipientid', controller.saveMessages);
+router.post('/message/:userId/:recipientId', controller.saveMessages);
 
 // get individual profile
 router.get('/profile/:id', controller.getProfile);
@@ -41,5 +41,6 @@ router.get('/match/:id', controller.verifyMatch);
 router.post('/photos', controller.uploadUserPhotos);
 
 router.put('/updateProfile/:id', controller.updateProfile);
+
 
 module.exports = router;
