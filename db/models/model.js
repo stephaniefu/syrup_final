@@ -64,7 +64,14 @@ const Message = db.define('message', {
 })
 
 User.belongsToMany(User, {as: 'matchee', through: Match, unique: false});
-User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
+
+
+Message.belongsTo(User, { as: 'user', through: Message, foreignKey: {name: 'userId', unique: false }})
+Message.belongsTo(User, { as: 'recipient', through: Message, foreignKey: {name: 'recipientId', unique: false }})
+
+
+
+// User.belongsToMany(User, {as: 'recipient', through: Message, unique: false});
 
 // User.sync({force: true})
 //   .then(() => {
