@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
 const CLOUDINARY_UPLOAD_PRESET = 'bjotvl61';
@@ -17,31 +16,28 @@ class editProfile extends Component {
       bio: '',
       gender: '',
       age: '',
-      uploadedProfile: null,
       uploadedProfileCloudinaryUrl: '',
-      uploadedFile: null,
       uploadedFileCloudinaryUrl: ''
     }
 
-    // bind functions
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnUpdate = this.handleOnUpdate.bind(this);
     this.onImageDrop = this.onImageDrop.bind(this);
     this.onProfileImageDrop = this.onProfileImageDrop.bind(this);
   }
 
-  // thisSucks() {
-  //   var myDropzone = new Dropzone("#my-awesome-dropzone");
-  //   myDropzone.on("drop", (file) => {
-  //     onProfileImageDrop(file)
-  //   });
-  // }
+  componentDidMount() {
+    this.dropzone1 = new Dropzone("div#my-dropzone1", { url: "/api/photos"});
+    this.dropzone1.on('addedfile', file => {
+      this.onProfileImageDrop([file]);
+    })
+    this.dropzone2 = new Dropzone("div#my-dropzone2", { url: "/api/photos"});
+    this.dropzone2.on('addedfile', file => {
+      this.onImageDrop([file]);
+    })
+  }
 
   onProfileImageDrop(files) {
-    this.setState({
-      uploadedProfile: files[0]
-    });
-
     this.handleProfileImageUpload(files[0]);
   }
 
@@ -65,11 +61,6 @@ class editProfile extends Component {
   }
 
   onImageDrop(files) {
-    console.log('on image drop invoked!')
-    this.setState({
-      uploadedFile: files[0]
-    });
-
     this.handleImageUpload(files[0]);
   }
 
@@ -102,26 +93,7 @@ class editProfile extends Component {
     })
   }
 
-  // handleOnUpdate() {
-  //   console.log(this.state);
-  //   axios.post('/api/profile', this.state)
-  //   .then(() => {
-  //     this.setState({
-  //       firstname: '',
-  //       profilepic: '',
-  //       images: [],
-  //       bio: '',
-  //       gender: '',
-  //       age: '',
-  //       uploadedProfile: null,
-  //       uploadedProfileCloudinaryUrl: '',
-  //       uploadedFile: null,
-  //       uploadedFileCloudinaryUrl: ''
-  //     })
-  //   })
-  // }
-
- handleOnUpdate() {
+  handleOnUpdate() {
     console.log('inhandleOnUPDateWOOT');
     axios.put(`/api/updateProfile/${localStorage.idTokenPayload}`, {
       firstname: this.state.firstname,
@@ -138,8 +110,6 @@ class editProfile extends Component {
       console.log(err)
     })
   }
-
-
 
   render() {
     return (
@@ -183,62 +153,20 @@ class editProfile extends Component {
                   <div className="form-group">
                     <label className="col-sm-2 control-label">Profile picture</label>
                     <div className="col-sm-10">
-                      <form>
-                        <div className="FileUpload">
-                          <Dropzone
-                            onDrop={this.onProfileImageDrop.bind(this)}
-                            multiple={false}
-                            accept="image/*">
-                            <div>Drop an image or click to select your profile picture.</div>
-                          </Dropzone>
-                        </div>
-
-                        <div>
-                          {this.state.uploadedProfileCloudinaryUrl === '' ? null :
-                          <div>
-                            <img src={this.state.uploadedProfileCloudinaryUrl} />
-                          </div>}
-                        </div>
-                      </form> 
+                      <div className="dropzone" id="my-dropzone1">
+                      </div>  
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-2 control-label">Additional pictures</label>
                     <div className="col-sm-10">
-                      <form>
-                        <div className="FileUpload">
-                          <Dropzone
-                            onDrop={this.onImageDrop.bind(this)}
-                            multiple={true}
-                            accept="image/*">
-                            <div>Add up to 6 additional images to your profile.</div>
-                          </Dropzone>
-                        </div>
-
-                        <div>
-                          {this.state.uploadedFileCloudinaryUrl === '' ? null :
-                          <div>
-                            <img src={this.state.uploadedFileCloudinaryUrl} />
-                          </div>}
-                        </div>
-                      </form> 
+                      <div className="dropzone" id="my-dropzone2">
+                      </div>  
                     </div>
                   </div>
-
-
-                  <div className="form-group">
-                    <label className="col-sm-2 control-label">Additional pictures</label>
-                    <div className="col-sm-10">
-                      <form action="/api/photos" className="dropzone" onChange={this.onImageDrop}
-                        id="my-awesome-dropzone">
-                      </form> 
-                    </div>
-                  </div>
-
-
                   <div className="form-group">
                     <div className="col-sm-10 col-sm-offset-2">
-                      <button onClick={this.handleOnUpdate} className="btn btn-primary">Submit</button>
+                      <button type="submit" onClick={this.handleOnUpdate} className="btn btn-primary">Submit</button>
                       <button type="reset" className="btn btn-default">Cancel</button>
                     </div>
                   </div>
@@ -253,3 +181,5 @@ class editProfile extends Component {
 }
 
 export default editProfile;
+
+ 

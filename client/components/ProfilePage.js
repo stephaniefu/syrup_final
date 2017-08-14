@@ -9,6 +9,7 @@ export default class ProfilePage extends React.Component {
     super(props);
     this.state = {
       id: this.props.match.params.id,
+      subject_id: localStorage.idTokenPayload,
       firstname: '',
       profilepic: '',
       images: [],
@@ -21,7 +22,7 @@ export default class ProfilePage extends React.Component {
   }
 
   handleSubmit() {
-    axios.post(`/api/match/${this.state.id}`)
+    axios.post(`/api/match/${this.state.id}/${this.state.subject_id}`)
     .then(response => {
       this.setState({
         matched: true
@@ -33,7 +34,7 @@ export default class ProfilePage extends React.Component {
   componentDidMount() {
     axios.all([
       axios.get(`/api/profile/${this.state.id}`),
-      axios.get(`/api/match/${this.state.id}`)
+      axios.get(`/api/match/${this.state.id}/${this.state.subject_id}`)
     ])
     .then(axios.spread((profile, match) => {
       var images = this.state.images;
