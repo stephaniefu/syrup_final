@@ -100,9 +100,11 @@ module.exports = {
     })
       .then(match => {
         res.status(202).send(match);
+        console.log('Trying to retrieve matches');
       })
       .catch(err => {
         res.status(404).send(err);
+        console.log('Trying to retrieve matches');
       })
   },
   uploadUserPhotos: (req, res) => {

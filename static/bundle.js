@@ -44328,7 +44328,11 @@ var Match = function (_React$Component) {
 					', ',
 					this.state.age
 				),
-				_react2.default.createElement('img', { src: this.state.profilepic, className: 'match-pic' }),
+				_react2.default.createElement(
+					'a',
+					{ href: '/' + this.state.id },
+					_react2.default.createElement('img', { src: this.state.profilepic, className: 'match-pic' })
+				),
 				_react2.default.createElement(
 					'h3',
 					null,
@@ -44738,6 +44742,10 @@ var _axios = __webpack_require__(28);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _MatchesResults = __webpack_require__(378);
+
+var _MatchesResults2 = _interopRequireDefault(_MatchesResults);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44764,9 +44772,12 @@ var Matches = function (_React$Component) {
   _createClass(Matches, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       console.log('THIS IS A userID in Matches: ', this.state.userId);
-      _axios2.default.get('/api/match/' + this.state.userId).then(function (data) {
-        console.log('BEEFEATER', data);
+      _axios2.default.get('/api/matches/' + this.state.userId).then(function (data) {
+        _this2.setState({ matches: data.data });
+        console.log('MATCHES', _this2.state.matches);
       }).catch(function (err) {
         console.log(err);
       });
@@ -44779,11 +44790,7 @@ var Matches = function (_React$Component) {
         'div',
         { className: 'intro-message' },
         _react2.default.createElement(_NavBar2.default, null),
-        _react2.default.createElement(
-          'h1',
-          null,
-          'This is the matches page!'
-        )
+        _react2.default.createElement(_MatchesResults2.default, { matches: this.state.matches, history: this.props.history })
       );
     }
   }]);
@@ -45317,6 +45324,184 @@ var LandingPage = function LandingPage(_ref) {
 };
 
 exports.default = LandingPage;
+
+/***/ }),
+/* 378 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Match = __webpack_require__(369);
+
+var _Match2 = _interopRequireDefault(_Match);
+
+var _MyMatch = __webpack_require__(379);
+
+var _MyMatch2 = _interopRequireDefault(_MyMatch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MatchesResults = function (_React$Component) {
+	_inherits(MatchesResults, _React$Component);
+
+	function MatchesResults(props) {
+		_classCallCheck(this, MatchesResults);
+
+		return _possibleConstructorReturn(this, (MatchesResults.__proto__ || Object.getPrototypeOf(MatchesResults)).call(this, props));
+	}
+
+	_createClass(MatchesResults, [{
+		key: 'render',
+		value: function render() {
+			var _this2 = this;
+
+			//console.log('These are props.matches in MUS: ', this.props.matches);
+			return _react2.default.createElement(
+				'div',
+				{ className: 'content-section-a' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'container' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-lg-5 col-sm-6' },
+							_react2.default.createElement('hr', { className: 'section-heading-spacer' }),
+							_react2.default.createElement('div', { className: 'clearfix' })
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'row' },
+						this.props.matches.map(function (match, i) {
+							return _react2.default.createElement(_MyMatch2.default, { match: match, history: _this2.props.history, key: i });
+						})
+					)
+				)
+			);
+		}
+	}]);
+
+	return MatchesResults;
+}(_react2.default.Component);
+
+exports.default = MatchesResults;
+
+/***/ }),
+/* 379 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(28);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+var _history = __webpack_require__(85);
+
+var _history2 = _interopRequireDefault(_history);
+
+var _reactRouterDom = __webpack_require__(73);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MyMatch = function (_React$Component) {
+	_inherits(MyMatch, _React$Component);
+
+	function MyMatch(props) {
+		_classCallCheck(this, MyMatch);
+
+		var _this = _possibleConstructorReturn(this, (MyMatch.__proto__ || Object.getPrototypeOf(MyMatch)).call(this, props));
+
+		_this.state = {
+			id: _this.props.match.matcheeId,
+			firstname: '',
+			age: 25,
+			profilepic: '',
+			own_id: localStorage.idTokenPayload,
+			matched: false
+		};
+		return _this;
+	}
+
+	_createClass(MyMatch, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this2 = this;
+
+			console.log('RENDERED', this.state.id);
+			_axios2.default.get('/api/profile/' + this.state.id).then(function (data) {
+				console.log('PROFILE INFO: ', data.data);
+				_this2.setState({
+					firstname: data.data.firstname,
+					age: data.data.age,
+					profilepic: data.data.profilepic
+				});
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			console.log('This is the props in MyMatch: ', this.props);
+			return _react2.default.createElement(
+				'div',
+				{ className: 'col-sm-4 text-center match', onClick: this.renderProfile },
+				_react2.default.createElement(
+					'h2',
+					null,
+					this.state.firstname,
+					', ',
+					this.state.age
+				),
+				_react2.default.createElement(
+					'a',
+					{ href: '/' + this.state.id },
+					_react2.default.createElement('img', { src: this.state.profilepic, className: 'match-pic' })
+				)
+			);
+		}
+	}]);
+
+	return MyMatch;
+}(_react2.default.Component);
+
+exports.default = MyMatch;
 
 /***/ })
 /******/ ]);

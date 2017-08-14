@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import axios from 'axios';
+import MatchesResults from './MatchesResults'
 
 export default class Matches extends React.Component {
   constructor(props) {
@@ -13,9 +14,10 @@ export default class Matches extends React.Component {
 
   componentDidMount(){
     console.log('THIS IS A userID in Matches: ', this.state.userId);
-    axios.get(`/api/match/${this.state.userId}`)
+    axios.get(`/api/matches/${this.state.userId}`)
       .then(data => {
-        console.log('BEEFEATER', data);
+        this.setState({matches: data.data});
+        console.log('MATCHES', this.state.matches);
       })
       .catch(err => {
         console.log(err);
@@ -27,7 +29,7 @@ export default class Matches extends React.Component {
     return (
       <div className="intro-message">
         <NavBar />
-        <h1>This is the matches page!</h1>
+        <MatchesResults matches={this.state.matches} history={this.props.history} />
       </div>
     );
   }
