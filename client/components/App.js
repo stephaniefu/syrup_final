@@ -2,7 +2,7 @@ import React from 'react';
 import NavBarLogin from './NavBarLogin';
 import NavBar from './NavBar';
 import Main from './Main';
-import Messages from './Messages';
+import Messages from './Messages/Messages';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import UploadPage from './UploadPage';
@@ -28,8 +28,7 @@ const auth = new Auth();
 
 const App = () => {
 	if(auth.isAuthenticated()) {
-		console.log('this is the auth', auth)
-	}
+}
 
 	return (
 

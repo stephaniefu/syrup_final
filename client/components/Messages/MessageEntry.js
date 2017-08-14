@@ -1,12 +1,11 @@
 import React from 'react';
-
-const MessageEntry = ({ message, firstname }) => {
+const MessageEntry = ({ message, firstname, myname }) => {
   console.log('this is the messagentry', message)
   return (
     <div>
-      {firstname}: {message}
+       {/* You: {message}  */}
+       {myname}: {message} 
     </div>
   );
 };
-
 export default MessageEntry;

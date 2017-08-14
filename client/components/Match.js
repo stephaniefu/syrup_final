@@ -53,7 +53,7 @@ export default class Match extends React.Component{
 				matched: true
 			})
 		})
-		.catch(err => console.log('THIS IS ERRROR', err))
+		.catch(err => console.error(err))
 	}
 
 	render(){

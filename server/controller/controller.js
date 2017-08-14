@@ -40,6 +40,21 @@ module.exports = {
       res.status(404).send(err)
     })
   },
+  
+  getMessages: (req, res) => {
+    Model.Message.findAll({
+      where: {
+        userId: req.params.userId, 
+        recipientId: req.params.recipientId
+      }
+    })
+    .then(data=> {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
+  },
 
   getProfile: (req, res) => {
     Model.User.findById(req.params.id)
@@ -125,6 +140,15 @@ module.exports = {
       })
       .catch(err => {
         res.status(404).send(err);
+      })
+  },
+  retrieveFirstName: (req, res) => {
+    Model.User.findAll({where: {id: req.params.userId}})
+      .then(result => {
+        res.status(202).send(result)
+      })
+      .catch(err => {
+        res.status(404).send(err)
       })
   }
 }

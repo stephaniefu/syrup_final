@@ -24,7 +24,7 @@ router.post('/profile', controller.addProfile);
 // router.get('/message/:id', controller.getMessageByUser);
 // //Storing messages in DB
 router.post('/message/:userId/:recipientId', controller.saveMessages);
-
+router.get('/message/:userId/:recipientId', controller.getMessages);
 // get individual profile
 router.get('/profile/:id', controller.getProfile);
 router.get('/profile/get/:id', controller.renderClickedProfile);
@@ -41,6 +41,8 @@ router.get('/match/:id/:subject_id', controller.verifyMatch);
 router.post('/photos', controller.uploadUserPhotos);
 
 router.put('/updateProfile/:id', controller.updateProfile);
+
+router.get('/message/:userId', controller.retrieveFirstName);
 
 
 module.exports = router;
