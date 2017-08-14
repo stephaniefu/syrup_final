@@ -40,6 +40,21 @@ module.exports = {
       res.status(404).send(err)
     })
   },
+  
+  getMessages: (req, res) => {
+    Model.Message.findAll({
+      where: {
+        userId: req.params.userId, 
+        recipientId: req.params.recipientId
+      }
+    })
+    .then(data=> {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
+  },
 
   getProfile: (req, res) => {
     Model.User.findById(req.params.id)
@@ -90,10 +105,10 @@ module.exports = {
   getMatches: (req, res) => {
     Model.Match.findAll({
       where: { userId: req.params.userId },
-      include:[{
-        model: Model.User, as: 'matchee',
-        // attributes: ['firstname']
-      }]
+      // include:[{
+      //   model: Model.User, as: 'matchee',
+      //   // attributes: ['firstname']
+      // }]
     })
       .then(match => {
         res.status(202).send(match);

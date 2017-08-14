@@ -1,6 +1,6 @@
 import React from 'react';
 import MessageBox from './MessageBox';
-import NavBar from './NavBar';
+import NavBar from '../NavBar';
 import MatchList from './MatchList';
 import SocketIsockOClient from 'socket.io-client';
 import axios from 'axios';
@@ -17,8 +17,9 @@ export default class Messages extends React.Component {
     this.state = {
       messages: [],
       text: '',
-      firstnames: ['john', 'jacob', 'jen', 'jordan'],
-      firstname: ''
+      firstnames: [],
+      firstname: '',
+      matcheeIds: [],
     }
     // this.socket = SocketIOClient('http://localhost:8080');
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -29,36 +30,44 @@ export default class Messages extends React.Component {
   componentDidMount(){
     this.socket = io('/')
     this.socket.on('chat message', data => {
-      console.log('the data i get back', data)
-      // axios.get('http://localhost:8080/api/matches/:userId')
-      // .then(data => {
-      //   this.setState({
-      //     firstname: data.data
-      //   })
-      // })
-
-
-        this.setState({
+      this.setState({
           text: '',
           messages: [...this.state.messages, data],
         })
     })
+      axios.get(`http://localhost:8080/api/matches/${localStorage.idTokenPayload}`)
+      .then(({data}) => {
+        for (let i = 0; i < data.length; i++) {
+          this.setState({
+            matcheeIds: [...this.state.matcheeIds, Number(data[i]['matcheeId'])]
+          })
+        }
+      })
+      .then(() => {
+        for (let j = 0; j < this.state.matcheeIds.length; j++) {
+          axios.get(`http://localhost:8080/api/profile/${this.state.matcheeIds[j]}`)
+            .then(({data}) => {
+              this.setState({
+                firstnames: [...this.state.firstnames, data.firstname]
+              })
+            })
+        }
+      })
   }
 
-  handleOnChange(e) {
+  handleOnChange(e){
     this.setState({
       text: e.target.value
     })
   }
 
   handleOnSend(e){
-    console.log('asdlfkjas;kldfj', localStorage)
     e.preventDefault();
     this.socket.emit('send message', this.state.text)
     this.setState({
       text: ''
     })
-    axios.post(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/google-oauth2|110881503556851462946`, {
+    axios.post(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/${this.state.firstname}`, {
       text: this.state.text
     })
   }
@@ -67,18 +76,21 @@ export default class Messages extends React.Component {
     let name = this.state.firstnames[i]
     this.setState({
       firstname: name
-    }, () => {
-      console.log(this.state.firstname)
-    } )
+    })
+    axios.get(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/${this.state.firstname}`)
+    .then(({data}) => {
+      for (let i = 0; i < data.length; i++) {
+      this.setState({
+        messages: [...this.state.messages, data[i].text]
+      })
+    }})
   }
 
   render() {
-    console.log('this is your local storage', localStorage);
     return (
       <div className="intro-message">
         <NavBar />
         <MatchList className="matchlist" firstnames={this.state.firstnames} handleMatchClick={this.handleMatchClick}/>
-        <h1>This is the messages page!</h1>
         <div style={divStyle} >
         <MessageBox className="messagebox" messages={this.state.messages} firstname={this.state.firstname}/>
         </div>
