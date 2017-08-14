@@ -80,9 +80,9 @@ export default class Messages extends React.Component {
     axios.get(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/${this.state.firstname}`)
     .then(({data}) => {
       for (let i = 0; i < data.length; i++) {
-      this.setState({
-        messages: [...this.state.messages, data[i].text]
-      })
+      // this.setState({
+      //   messages: [...this.state.messages, data[i].text]
+      // })
     }})
   }
 
