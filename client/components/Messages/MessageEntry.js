@@ -4,7 +4,8 @@ const MessageEntry = ({ message, firstname }) => {
   console.log('this is the messagentry', message)
   return (
     <div>
-      {firstname}: {message}
+       {/* You: {message}  */}
+       You: {message} 
     </div>
   );
 };

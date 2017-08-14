@@ -42,5 +42,7 @@ router.post('/photos', controller.uploadUserPhotos);
 
 router.put('/updateProfile/:id', controller.updateProfile);
 
+router.get('/message/:userId', controller.retrieveFirstName);
+
 
 module.exports = router;

@@ -7,9 +7,9 @@ import axios from 'axios';
 
 // const socket = io.connect();
 
-const divStyle = {
-  height: 500,
-};
+// const divStyle = {
+//   height: 500,
+// };
 
 export default class Messages extends React.Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export default class Messages extends React.Component {
       firstnames: [],
       firstname: '',
       matcheeIds: [],
+      myname:''
     }
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSend = this.handleOnSend.bind(this);
@@ -88,6 +89,15 @@ export default class Messages extends React.Component {
         })
         console.log('this is the messages', this. state.messages);
       }})
+      .then(result => {
+        axios.get(`http://localhost:8080/api/message/${localStorage.idTokenPayload}`)
+          .then(({data}) => {
+            console.log('this is the data of trying to get the firstname', data[0].email)
+            this.setState({
+              myname: data.email
+            })
+          })
+      })
     })
   }
 
@@ -95,14 +105,25 @@ export default class Messages extends React.Component {
     return (
       <div className="intro-message">
         <NavBar />
-        <MatchList className="matchlist" firstnames={this.state.firstnames} handleMatchClick={this.handleMatchClick}/>
-        <div style={divStyle} >
-        <MessageBox className="messagebox" messages={this.state.messages} firstname={this.state.firstname}/>
+        <div className="chatbox">
+
+          <div className="chatList">
+            <MatchList firstnames={this.state.firstnames} handleMatchClick={this.handleMatchClick}/>
+          </div>
+
+          {/* <div style={divStyle} > */}
+          <div className="message-box">
+            <MessageBox messages={this.state.messages} firstname={this.state.firstname} handleMatchClick={this.handleMatchClick}/>
+          {/* </div> */}
+            <div>
+              <form className="message-form">
+                <input name="message" value={this.state.text} onChange={this.handleOnChange}/>
+                <button onClick={this.handleOnSend}>Send</button>
+              </form>
+            </div>
+
+          </div>
         </div>
-         <form>
-           <input name="message" value={this.state.text} onChange={this.handleOnChange}/>
-           <button onClick={this.handleOnSend}>Send</button>
-        </form>
       </div>
     );
   }

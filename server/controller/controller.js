@@ -136,5 +136,14 @@ module.exports = {
       .catch(err => {
         res.status(404).send(err);
       })
+  },
+  retrieveFirstName: (req, res) => {
+    Model.User.findAll({where: {id: req.params.userId}})
+      .then(result => {
+        res.status(202).send(result)
+      })
+      .catch(err => {
+        res.status(404).send(err)
+      })
   }
 }
