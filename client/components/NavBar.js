@@ -37,7 +37,6 @@ import auth from 'auth0-js';
 class NavBar extends Component {
   constructor(props){
     super(props);
-
     this.logout = this.logout.bind(this);
   }
 
@@ -45,8 +44,7 @@ class NavBar extends Component {
     console.log('youre in logout')
     auth.logout();
   }
-
-
+  
   render() {
     return (
       <nav className="navbar navbar-default navbar-fixed-top topnav" role="navigation">
