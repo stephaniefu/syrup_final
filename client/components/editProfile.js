@@ -3,6 +3,7 @@ import axios from 'axios';
 import request from 'superagent';
 import appId from '../../apiKey';
 import apiKey from '../../apiKey';
+import NavBar from './NavBar';
 
 const CLOUDINARY_UPLOAD_PRESET = 'bjotvl61';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dmbpgz4gp/image/upload';
@@ -135,6 +136,7 @@ class editProfile extends Component {
   render() {
     return (
       <div className="container bootstrap snippets edit-profile">
+        <NavBar />
         <div className="row">
           <div className="col-xs-12 col-sm-9">
             <div className="form-horizontal">
