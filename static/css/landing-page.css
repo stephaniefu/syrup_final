@@ -22,7 +22,7 @@ h6 {
 
 .topnav {
     font-size: 24px; 
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Pompiere', cursive;
 }
 
 .lead {
@@ -180,7 +180,7 @@ p.copyright {
 }
 
 h1 {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Petit Formal Script', cursive;
     font-weight: 700;
     font-size: 100px;
 }
@@ -321,4 +321,14 @@ h1 {
     position: relative;
     top: 125px;
     margin-left: 19%;
+}
+
+#brand-image{
+    height: 160%;
+}
+
+#matches-title{
+    font-family: 'Pompiere', cursive;
+    font-weight: 700;
+    font-size: 60px;
 }

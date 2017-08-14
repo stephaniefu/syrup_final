@@ -33,16 +33,16 @@ export default class NavBarLogin extends React.Component {
 		                    <span className="icon-bar"></span>
 		                    <span className="icon-bar"></span>
                 		</button>
-                		<a className="navbar-brand topnav" href="#">Syrup</a>
+                		<a className="navbar-brand topnav" href="#"><img id="brand-image" src="https://files.slack.com/files-pri/T2SV1LBC6-F6PA047N2/syrup_logo.png"/></a>
             		</div>
             		<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 		<ul className="nav navbar-nav navbar-right">
                     		<li>
-                        		<a onClick={this.login}>Log In</a>
+                        		<a onClick={this.login} style={{cursor:'pointer'}}>Log In</a>
 														{console.log('this is the props', this.props.auth)}
                     		</li>
                     		<li>
-                        		<a onClick={this.login}>Sign Up</a>
+                        		<a onClick={this.login} style={{cursor:'pointer'}}>Sign Up</a>
                     		</li>
                 		</ul>
             		</div>
