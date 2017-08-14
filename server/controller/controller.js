@@ -56,6 +56,7 @@ module.exports = {
   },
 
   connectMatch: (req, res) => {
+    console.log('CONNECT MATCH REQ!!!! ', req);
     Model.Match.create({
       userId: req.params.subject_id,
       matcheeId: req.params.id,
@@ -65,6 +66,7 @@ module.exports = {
     })
     .catch(err => {
       res.status(404).send(err)
+      console.log('THIS IS THE ERR:' , err);
     })
   },
 
@@ -88,18 +90,21 @@ module.exports = {
   },
 
   getMatches: (req, res) => {
+    console.log('Trying to retrieve matches');
     Model.Match.findAll({
       where: { userId: req.params.userId },
-      include:[{
-        model: Model.User, as: 'matchee',
-        // attributes: ['firstname']
-      }]
+      // include:[{
+      //   model: Model.User, as: 'matchee',
+      //   // attributes: ['firstname']
+      // }]
     })
       .then(match => {
         res.status(202).send(match);
+        console.log('Trying to retrieve matches');
       })
       .catch(err => {
         res.status(404).send(err);
+        console.log('Trying to retrieve matches');
       })
   },
   uploadUserPhotos: (req, res) => {

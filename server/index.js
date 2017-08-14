@@ -36,14 +36,13 @@ server.listen(PORT, err => {
 
 io.on('connection', socket => {
     console.log('a user connected', socket.id);
-      socket.on('disconnect', () => {
-       console.log('user disconnected')
-});
+    socket.on('disconnect', () => {
+      console.log('user disconnected')
+    });
 
-socket.on('send message', msg => {
-  console.log('message: ' + msg)
-  io.sockets.emit('chat message', msg);
-})
-
+  socket.on('send message', msg => {
+    console.log('message: ' + msg)
+    io.sockets.emit('chat message', msg);
+  })
 
 })
