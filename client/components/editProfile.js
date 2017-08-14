@@ -203,4 +203,8 @@ class editProfile extends Component {
   }
 }
 
+<<<<<<< HEAD
 export default editProfile;
+=======
+export default editProfile;
+>>>>>>> origin/master

@@ -5,8 +5,8 @@ import apiKey from '../../apiKey';
 import MatchesUploadSection from './MatchesUploadSection';
 
 export default class UploadSection extends React.Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
         this.state = {
             input: '',
             isMatching: false,
@@ -15,7 +15,7 @@ export default class UploadSection extends React.Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-	}
+    }
 
     handleInputChange(event){
         event.preventDefault();
@@ -76,35 +76,35 @@ export default class UploadSection extends React.Component {
         }
     }
 
-	render(){
+    render(){
         //console.log('props in US', this.props);
-		return(
+        return(
             <div>
-    			<div className="intro-header">
-            		<div className="container">
+                <div className="intro-header-upload">
+                    <div className="container">
 
-                		<div className="row">
-                    		<div className="col-lg-12">
-                        		<div className="intro-message">
-                            		<h1>Syrup</h1>
-                            		<h3>A New Way to Date Online</h3>
-                            		<hr className="intro-divider"/>
-                        		</div>
-                    		</div>
-                    		<div>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="intro-message">
+                                    <h1>Syrup</h1>
+                                    <h3>A New Way to Date Online</h3>
+                                    <hr className="intro-divider"/>
+                                </div>
+                            </div>
+                            <div>
                         
-                    		</div>
-                    		<form className="upload-form">
-                        		<input onChange={this.handleInputChange} type="text" className="input-lg" placeholder="Enter image url..." />
-                        		<input onClick={this.handleSubmit} className="button" id="upload-button" type="submit" value="Upload" />
-                    		</form>
+                            </div>
+                            <form className="upload-form">
+                                <input onChange={this.handleInputChange} type="text" className="input-lg" placeholder="Enter image url..." />
+                                <input onClick={this.handleSubmit} className="button" id="upload-button" type="submit" value="Upload" />
+                            </form>
                             {this.renderUploadPic()}
-                		</div>
-            		</div>
-        		</div>
+                        </div>
+                    </div>
+                </div>
                 {this.renderMatchesUploadSection()}
             </div>
 
-		);
-	}
+        );
+    }
 }
