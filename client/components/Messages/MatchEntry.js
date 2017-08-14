@@ -2,7 +2,7 @@ import React from 'react';
 
 const MatchEntry = ( { firstname, i, handleMatchClick, name }) => {
   return (
-    <div onClick={() => {handleMatchClick(i)}} style={{cursor:'pointer'}}>
+    <div className="matchentry" onClick={() => {handleMatchClick(i)}} style={{cursor:'pointer'}}>
       {firstname}
     </div>
   );
