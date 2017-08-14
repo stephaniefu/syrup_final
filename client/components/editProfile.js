@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import request from 'superagent';
+import appId from '../../apiKey';
+import apiKey from '../../apiKey';
 
 const CLOUDINARY_UPLOAD_PRESET = 'bjotvl61';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dmbpgz4gp/image/upload';
@@ -10,6 +12,7 @@ class editProfile extends Component {
     super(props);
 
     this.state={
+      subject_id: localStorage.idTokenPayload,
       firstname: '',
       profilepic: '',
       images: [],
@@ -94,21 +97,39 @@ class editProfile extends Component {
   }
 
   handleOnUpdate() {
-    console.log('inhandleOnUPDateWOOT');
-    axios.put(`/api/updateProfile/${localStorage.idTokenPayload}`, {
-      firstname: this.state.firstname,
-      profilepic: this.state.profilepic,
-      images: this.state.images,
-      bio: this.state.bio,
-      gender: this.state.gender,
-      age: this.state.age
-    })
-    .then(data => {
-      console.log(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    console.log(this.state);
+    const body = {
+      "image": this.state.profilepic,
+      "subject_id": this.state.subject_id,
+      "gallery_name": "SyrupPractice"
+    };
+    const api = {
+      "app_key": apiKey.apiKey,
+      "app_id": appId.appId
+    };
+
+    console.log('body is', body);
+
+    axios.all([
+      axios.put(`/api/updateProfile/${localStorage.idTokenPayload}`, this.state),
+      axios.post('https://api.kairos.com/enroll', body, {headers: api})
+    ])
+    .then(axios.spread((profile, match) => {
+      
+      this.setState({
+        firstname: '',
+        profilepic: '',
+        images: [],
+        bio: '',
+        gender: '',
+        age: '',
+        uploadedProfileCloudinaryUrl: '',
+        uploadedFileCloudinaryUrl: ''
+      })
+    }))
+    .catch(err => { 
+      return console.error(err) 
+    });
   }
 
   render() {
@@ -181,5 +202,3 @@ class editProfile extends Component {
 }
 
 export default editProfile;
-
- 

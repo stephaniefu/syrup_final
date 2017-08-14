@@ -21,7 +21,6 @@ export default class Messages extends React.Component {
       firstname: '',
       matcheeIds: [],
     }
-    // this.socket = SocketIOClient('http://localhost:8080');
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSend = this.handleOnSend.bind(this);
     this.handleMatchClick = this.handleMatchClick.bind(this);
@@ -73,12 +72,16 @@ export default class Messages extends React.Component {
   }
 
   handleMatchClick(i){
+    console.log('this is the key', i)
     let name = this.state.firstnames[i]
     this.setState({
       firstname: name
+    }, () => {
+      console.log('this is the first name', this.state.firstname)
     })
     axios.get(`http://localhost:8080/api/message/${localStorage.idTokenPayload}/${this.state.firstname}`)
     .then(({data}) => {
+      console.log('this is the data', data)
       for (let i = 0; i < data.length; i++) {
       // this.setState({
       //   messages: [...this.state.messages, data[i].text]
