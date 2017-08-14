@@ -56,7 +56,7 @@ class NavBar extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link className="navbar-brand topnav" to='/'>Syrup</Link>
+              <Link className="navbar-brand topnav" to='/'><img id="brand-image" src="https://files.slack.com/files-pri/T2SV1LBC6-F6PA047N2/syrup_logo.png"/></Link>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
@@ -66,7 +66,7 @@ class NavBar extends Component {
               <li><Link to='/profile'>Profile</Link></li>
               {/* <li><Link to='/ownProfile'>Edit Profile</Link></li> */}
                {/* {console.log('this is the propsasdff', this.props.auth)}  */}
-              <li><a onClick={() => this.logout(this.props.auth)}>Log Out</a></li>
+              <li><a onClick={() => this.logout(this.props.auth)} style={{cursor:'pointer'}}>Log Out</a></li>
             </ul>
           </div>
       </div>

@@ -13,8 +13,18 @@ export default class HomePage extends React.Component {
             		<div className="row">
                 		<div className="col-lg-12">
                     		<div className="intro-message">
-                        		<h1>Syrup</h1>
-                        		
+                        		<br />
+                        		<br />
+														<br />
+                        		<br />
+														<br />
+                        		<br />
+														<br />
+                        		<br />
+														<br />
+                        		<br />
+														<br />
+                        		<br />
                     		</div>
                 		</div>
             		</div>
