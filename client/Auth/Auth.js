@@ -1,16 +1,17 @@
 import auth0 from 'auth0-js';
 import { AUTH_CONFIG } from './auth0';
 import history from '../history';
+import axios from 'axios';
 
 export default class Auth {
   constructor() {
-    this.autho0 = new auth0.WebAuth({
+    this.auth0 = new auth0.WebAuth({
       domain: AUTH_CONFIG.domain,
       clientID: AUTH_CONFIG.clientID,
       redirectUri: AUTH_CONFIG.redirectUri,
       audience: `https://${AUTH_CONFIG.domain}/userinfo`,
       responseType: 'token id_token',
-      scope: 'openid'
+      scope: 'openid profile'
     });
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -19,16 +20,39 @@ export default class Auth {
   }
 
   login() {
-    this.autho0.authorize();
+    this.auth0.authorize()
   }
 
   handleAuthentication() {
+    console.log('youre in handle authentication')
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('this is your auth result', authResult)
+        axios.get('https://stephaniefu.auth0.com/userinfo', {
+          headers: {'Authorization': `Bearer ${authResult.accessToken}`}
+        })
+    .then(({ data }) => {
+      console.log('this is the data', data)
+      console.log('this is the datan', data.name)
+      console.log('this is the datas', data.sub)
+      axios.post('/api/profile', {
+        email: data.name,
+        id: data.sub
+      })
+      .then(res => {
+        console.log('asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfsdafasdfasdf',res);
+        // axios.get('/api/')
+      })
+      .then(()=> {
         this.setSession(authResult);
-        history.replace('/home');
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+        // history.replace('/upload');
       } else if (err) {
-        history.replace('/home');
+        // history.replace('/upload');
         console.log(err);
       }
     });
@@ -36,12 +60,18 @@ export default class Auth {
 
   setSession(authResult) {
     // Set the time that the access token will expire at
+    console.log('we are in setSesstions')
     let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
-    history.replace('/home');
+    console.log('HERE IS TYPE') 
+    console.log('HERE IS TYPE', authResult.idTokenPayload['sub'])
+    localStorage.setItem('idTokenPayload', authResult.idTokenPayload['sub'])
+    // localStorage.setItem('idTokenPayload', authResult.idTokenPayload[0])
+    // console.log('this is the authResesult', JSON.parse(authResult)) 
+// navigate to the home route
+    history.replace('/upload');
   }
 
   logout() {
@@ -50,7 +80,7 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     // navigate to the home route
-    history.replace('/home');
+    history.replace('/');
   }
 
   isAuthenticated() {

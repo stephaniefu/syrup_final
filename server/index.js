@@ -5,12 +5,13 @@ const db = require('../db');
 const model = require('../db/models/model');
 const routes = require('./routes/routes');
 const path = require('path');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const cors = require('cors');
-//routes, model
 
 const PORT = 8080;
 
-const app = express();
 
 app.use(parser.json());
 app.use(parser.urlencoded( {extended: true }));
@@ -25,10 +26,33 @@ app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../static/index.html'))
 });
 
-app.listen(PORT, err => {
+// app.listen(PORT, err => {
+//   if (err) {
+//     console.log(`Could not connect to PORT ${PORT}`, err)
+//   } else {
+//     console.log(`Successfully connected to PORT ${PORT}`)
+//   }
+// });
+
+// socket.io
+server.listen(PORT, err => {
   if (err) {
-    console.log(`Could not connect to PORT ${PORT}`, err)
+    console.log(err)
   } else {
     console.log(`Successfully connected to PORT ${PORT}`)
   }
 });
+
+io.on('connection', socket => {
+    console.log('a user connected', socket.id);
+      socket.on('disconnect', () => {
+       console.log('user disconnected')
+  })
+})
+
+io.on('connection', socket => {
+  socket.on('send message', msg => {
+    console.log('message: ' + msg)
+    io.emit('chat message', msg);
+  })
+})

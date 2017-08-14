@@ -5,20 +5,40 @@ const data = require('../../data');
 
 module.exports = {
   addProfile: (req, res) => {
-    Model.User.create({
-      firstname: req.body.firstname,
-      age: req.body.age,
-      gender: req.body.gender,
-      bio: req.body.bio,
-      profilepic: req.body.profilepic,
-      images: req.body.images
+    console.log('this is the req.body ', req.body.id)
+    Model.User.findOrCreate({
+      where: {id: req.body.id}, defaults: {
+        id: req.body.id,
+        email: req.body.email,
+        firstname: req.body.firstname,
+        age: req.body.age,
+        gender: req.body.gender,
+        bio: req.body.bio,
+        profilepic: req.body.profilepic,
+        images: req.body.images
+      }
     })
   .then(data => {
     res.status(200).send(data)
   })
   .catch(err => {
+    console.log(err)
     res.status(404).send(err)
   })
+  },
+
+  saveMessages: (req, res) => {
+    Model.Message.create({
+      text: req.body.text,
+      userId: req.params.userId,
+      recipientId: req.params.recipientId
+    })
+    .then(data => {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(404).send(err)
+    })
   },
 
   getProfile: (req, res) => {
@@ -36,8 +56,9 @@ module.exports = {
   },
 
   connectMatch: (req, res) => {
+    console.log('CONNECT MATCH REQ!!!! ', req);
     Model.Match.create({
-      userId: 3,
+      userId: req.params.subject_id,
       matcheeId: req.params.id,
     })
     .then(data => {
@@ -45,13 +66,14 @@ module.exports = {
     })
     .catch(err => {
       res.status(404).send(err)
+      console.log('THIS IS THE ERR:' , err);
     })
   },
 
   verifyMatch: (req, res) => {
     Model.Match.findAll({
       where: {
-        userId: 3,
+        userId: req.params.subject_id,
         matcheeId: req.params.id
       }
     })
@@ -65,5 +87,42 @@ module.exports = {
     .catch(err => {
       res.status(404).send(err)
     })
+  },
+
+  getMatches: (req, res) => {
+    console.log('Trying to retrieve matches');
+    Model.Match.findAll({
+      where: { userId: req.params.userId },
+      // include:[{
+      //   model: Model.User, as: 'matchee',
+      //   // attributes: ['firstname']
+      // }]
+    })
+      .then(match => {
+        res.status(202).send(match);
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
+  },
+  uploadUserPhotos: (req, res) => {
+    res.send('OK');
+  },
+
+  updateProfile: (req, res) => {
+    Model.User.update({
+      firstname: req.body.firstname,
+      age: req.body.age,
+      gender: req.body.gender,
+      bio: req.body.bio,
+      profilepic: req.body.profilepic,
+      images: req.body.images
+    }, {where: {id: req.params.id}, returning: true})
+      .then(update => {
+        res.status(202).send(update);
+      })
+      .catch(err => {
+        res.status(404).send(err);
+      })
   }
-};
+}

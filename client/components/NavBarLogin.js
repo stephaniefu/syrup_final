@@ -1,21 +1,28 @@
 import React from 'react';
-import Auth from '../Auth/Auth';
-import { Link } from 'react-router-dom';
 
-const auth = new Auth();
 
 export default class NavBarLogin extends React.Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 
+		this.props.auth.handleAuthentication();
+		
+		
 		this.login = this.login.bind(this);
+		this.logout = this.logout.bind(this);
 	}
 
 	login(){
-		auth.login();
+		this.props.auth.login()
+	}
+
+	logout() {
+		this.props.auth.logout();
 	}
 
 	render(){
+		// const { isAuthenticated } = this.props.auth;
+
 		return(
 			<nav className="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         		<div className="container topnav">
@@ -26,15 +33,16 @@ export default class NavBarLogin extends React.Component {
 		                    <span className="icon-bar"></span>
 		                    <span className="icon-bar"></span>
                 		</button>
-                		<a className="navbar-brand topnav" href="#"><Link to='/'>Syrup</Link></a>
+                		<a className="navbar-brand topnav" href="#">Syrup</a>
             		</div>
             		<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 		<ul className="nav navbar-nav navbar-right">
                     		<li>
-                        		<a href="#login" onClick={this.login}>Log In</a>
+                        		<a onClick={this.login}>Log In</a>
+														{console.log('this is the props', this.props.auth)}
                     		</li>
                     		<li>
-                        		<a href="#signup">Sign Up</a>
+                        		<a onClick={this.login}>Sign Up</a>
                     		</li>
                 		</ul>
             		</div>

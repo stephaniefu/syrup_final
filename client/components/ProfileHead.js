@@ -4,6 +4,16 @@ export default class ProfileHead extends React.Component {
   constructor(props) {
     super(props);
     this.sendMatch = this.sendMatch.bind(this);
+    this.isMatched = this.isMatched.bind(this);
+    this.isOwnProfile = this.isOwnProfile.bind(this);
+  }
+
+  isOwnProfile() {
+    if (this.props.data.own) {
+      return <a href="/editProfile"><p><button className="cardButton">Edit Profile</button></p></a>
+    } else {
+      return this.isMatched();
+    }
   }
 
   isMatched() {
@@ -27,11 +37,11 @@ export default class ProfileHead extends React.Component {
           <div className="profileContainer">
             <h2>{this.props.data.firstname}, {this.props.data.age}</h2>
             <p>{this.props.data.bio}</p>
-            {this.isMatched()}
+            {this.isOwnProfile()}
+            {/* {this.isMatched()} */}
           </div>
         </div>
       </div>
     );
   }
 }
-
