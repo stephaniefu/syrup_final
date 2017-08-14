@@ -5,7 +5,6 @@ import MatchList from './MatchList';
 import SocketIsockOClient from 'socket.io-client';
 import axios from 'axios';
 
-
 // const socket = io.connect();
 
 const divStyle = {
@@ -45,11 +44,6 @@ export default class Messages extends React.Component {
         })
     })
   }
-  // componentWillUpdate(nextProps, nextState) {
-  //   if(this.state.firstname !== nextState.firstname) {
-  //     console.log(nextState.firstname)
-  //   }
-  // }
 
   handleOnChange(e) {
     this.setState({
@@ -83,10 +77,10 @@ export default class Messages extends React.Component {
     return (
       <div className="intro-message">
         <NavBar />
-        <MatchList firstnames={this.state.firstnames} handleMatchClick={this.handleMatchClick}/>
+        <MatchList className="matchlist" firstnames={this.state.firstnames} handleMatchClick={this.handleMatchClick}/>
         <h1>This is the messages page!</h1>
         <div style={divStyle} >
-        <MessageBox messages={this.state.messages} firstname={this.state.firstname}/>
+        <MessageBox className="messagebox" messages={this.state.messages} firstname={this.state.firstname}/>
         </div>
          <form>
            <input name="message" value={this.state.text} onChange={this.handleOnChange}/>

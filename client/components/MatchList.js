@@ -4,7 +4,7 @@ import MatchEntry from './MatchEntry';
 const MatchList = ({ firstnames, handleMatchClick }) => {
   return (
     <div>
-      <h1>Matches</h1>
+      <h3 className="matchestitle">Matches</h3>
         {firstnames.map((firstname, i) => {
           return <MatchEntry firstname={firstname} i={i} handleMatchClick={handleMatchClick}/>
         })}

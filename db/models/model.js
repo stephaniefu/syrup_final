@@ -99,7 +99,7 @@ User.sync();
 // User.sync({force: true});
 Match.sync();
 // Message.sync();
-Message.sync({force: true});
+// Message.sync({force: true});
 
 // Match.sync({force: true})
 //   .then(() => {

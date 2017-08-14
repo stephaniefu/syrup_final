@@ -57,7 +57,7 @@ module.exports = {
 
   connectMatch: (req, res) => {
     Model.Match.create({
-      userId: 3,
+      userId: req.params.subject_id,
       matcheeId: req.params.id,
     })
     .then(data => {
@@ -71,7 +71,7 @@ module.exports = {
   verifyMatch: (req, res) => {
     Model.Match.findAll({
       where: {
-        userId: 3,
+        userId: req.params.subject_id,
         matcheeId: req.params.id
       }
     })
