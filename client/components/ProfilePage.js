@@ -58,6 +58,7 @@ export default class ProfilePage extends React.Component {
   render() {
     return (
       <div className="intro-message">
+        <NavBar />
         <ProfileHead data={this.state} handleSubmit={this.handleSubmit} />
         <div className="photosContainer">
           <ProfilePhotos images={this.state.images} />       
